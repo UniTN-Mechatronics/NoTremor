@@ -181,7 +181,7 @@ end
 
 function PBPath:fname()
     self.runid = readLocalData("runid", 0)
-    return os.getenv("HOME").."/Documents/Dropbox.assetpack/log_lines_"..self.runid..".txt"
+    return os.getenv("HOME").."/Documents/log_lines_"..self.runid..".txt"
 end
 
 function PBPath:rand()
