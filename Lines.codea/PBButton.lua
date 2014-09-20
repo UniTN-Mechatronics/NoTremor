@@ -57,5 +57,6 @@ function PBButton:touched(touch, args)
         if self.action then
             self.action(args)
         end
+        print("stylusPressure="..stylusPressure())
     end
 end

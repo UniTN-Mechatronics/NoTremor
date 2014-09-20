@@ -1,23 +1,25 @@
 //
-//  MXCodeaViewController.m
+//  MXConfigController.m
 //  Lines
 //
 //  Created by Paolo Bosetti on 19/09/14.
 //  Copyright (c) 2014 MyCompany. All rights reserved.
 //
 
-#import "MXCodeaViewController.h"
+#import "MXConfigController.h"
 #import "AppDelegate.h"
 
-@interface MXCodeaViewController ()
+@interface MXConfigController ()
+@property (weak, nonatomic) IBOutlet UITableView *stylusTable;
 
 @end
 
-@implementation MXCodeaViewController
+@implementation MXConfigController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  //do something like background color, title, etc you self
+  [_stylusTable setDataSource:[appDelegate stylusAddon]];
+  [appDelegate stylusAddon].stylusTable = _stylusTable;
     // Do any additional setup after loading the view.
 }
 
@@ -30,16 +32,8 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  NSLog(@"segue");
-  [[appDelegate stylusAddon] searchStylus:self];
-  [appDelegate stylusAddon].value++;
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+  [[appDelegate stylusAddon] stopSearchStylus:self];
 }
 
-
-- (IBAction)configure:(id)sender {
-  NSLog(@"pinch action");
-}
 
 @end

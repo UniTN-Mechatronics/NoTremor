@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		881CFFE419CC24EF00A39D83 /* MXCodeaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFE319CC24EF00A39D83 /* MXCodeaViewController.m */; };
-		88342DA119CB3D5F0068F865 /* MXAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXAddon.m */; };
+		881CFFE619CC55DD00A39D83 /* WacomDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE519CC55DD00A39D83 /* WacomDevice.framework */; };
+		881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */; };
+		881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
+		88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXStylusAddon.m */; };
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
 		DB0DC0AE18C459EC005F4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DC0AD18C459EC005F4723 /* Images.xcassets */; };
 		DB0DC0B618C46085005F4723 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B518C46085005F4723 /* CoreImage.framework */; };
@@ -53,8 +56,12 @@
 /* Begin PBXFileReference section */
 		881CFFE219CC24EF00A39D83 /* MXCodeaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXCodeaViewController.h; sourceTree = "<group>"; };
 		881CFFE319CC24EF00A39D83 /* MXCodeaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXCodeaViewController.m; sourceTree = "<group>"; };
-		88342D9F19CB3D5F0068F865 /* MXAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXAddon.h; sourceTree = "<group>"; };
-		88342DA019CB3D5F0068F865 /* MXAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXAddon.m; sourceTree = "<group>"; };
+		881CFFE519CC55DD00A39D83 /* WacomDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WacomDevice.framework; path = Libs/WacomDevice.framework; sourceTree = "<group>"; };
+		881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		881CFFE919CC5E1100A39D83 /* MXConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXConfigController.h; sourceTree = "<group>"; };
+		881CFFEA19CC5E1100A39D83 /* MXConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXConfigController.m; sourceTree = "<group>"; };
+		88342D9F19CB3D5F0068F865 /* MXStylusAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXStylusAddon.h; sourceTree = "<group>"; };
+		88342DA019CB3D5F0068F865 /* MXStylusAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXStylusAddon.m; sourceTree = "<group>"; };
 		88342DA219CB3EEB0068F865 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DB0DC0AD18C459EC005F4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB0DC0B518C46085005F4723 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -113,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */,
 				DB5E404418CD80570001CC1F /* Social.framework in Frameworks */,
 				DB0DC0BA18C4608E005F4723 /* Accelerate.framework in Frameworks */,
 				DB0DC0B818C4608A005F4723 /* CoreLocation.framework in Frameworks */,
@@ -137,6 +145,7 @@
 				DB8A006F16F2E039005F87A6 /* QuartzCore.framework in Frameworks */,
 				DB8A004716F2DBDA005F87A6 /* UIKit.framework in Frameworks */,
 				DB8A004916F2DBDA005F87A6 /* Foundation.framework in Frameworks */,
+				881CFFE619CC55DD00A39D83 /* WacomDevice.framework in Frameworks */,
 				DB8A006816F2E019005F87A6 /* libcodea.a in Frameworks */,
 				DB8A006A16F2E019005F87A6 /* libtools.a in Frameworks */,
 			);
@@ -166,6 +175,8 @@
 		DB8A004516F2DBDA005F87A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */,
+				881CFFE519CC55DD00A39D83 /* WacomDevice.framework */,
 				DB5E404318CD80570001CC1F /* Social.framework */,
 				DB0DC0B918C4608E005F4723 /* Accelerate.framework */,
 				DB0DC0B718C4608A005F4723 /* CoreLocation.framework */,
@@ -206,6 +217,8 @@
 				DB8A008E16F2E166005F87A6 /* CodeaViewController.h */,
 				881CFFE219CC24EF00A39D83 /* MXCodeaViewController.h */,
 				881CFFE319CC24EF00A39D83 /* MXCodeaViewController.m */,
+				881CFFE919CC5E1100A39D83 /* MXConfigController.h */,
+				881CFFEA19CC5E1100A39D83 /* MXConfigController.m */,
 				DB8A005516F2DBDA005F87A6 /* AppDelegate.h */,
 				DB8A005616F2DBDA005F87A6 /* AppDelegate.mm */,
 				88342DA219CB3EEB0068F865 /* Main.storyboard */,
@@ -243,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				DBF44365170F00F20026A109 /* CodeaAddon.h */,
-				88342D9F19CB3D5F0068F865 /* MXAddon.h */,
-				88342DA019CB3D5F0068F865 /* MXAddon.m */,
+				88342D9F19CB3D5F0068F865 /* MXStylusAddon.h */,
+				88342DA019CB3D5F0068F865 /* MXStylusAddon.m */,
 			);
 			path = Addons;
 			sourceTree = "<group>";
@@ -356,8 +369,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */,
 				DB8A005316F2DBDA005F87A6 /* main.m in Sources */,
-				88342DA119CB3D5F0068F865 /* MXAddon.m in Sources */,
+				88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */,
 				881CFFE419CC24EF00A39D83 /* MXCodeaViewController.m in Sources */,
 				DB8A005716F2DBDA005F87A6 /* AppDelegate.mm in Sources */,
 			);
@@ -441,6 +455,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lines/Lines-Prefix.pch";
 				INFOPLIST_FILE = "Lines/Lines-Info.plist";
@@ -465,6 +483,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lines/Lines-Prefix.pch";
 				INFOPLIST_FILE = "Lines/Lines-Info.plist";

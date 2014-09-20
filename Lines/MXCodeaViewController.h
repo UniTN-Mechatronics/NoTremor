@@ -7,10 +7,11 @@
 //
 
 #import "CodeaViewController.h"
-#import "Addons/MXAddon.h"
+#import "MXConfigController.h"
+#import "Addons/MXStylusAddon.h"
 
 @interface MXCodeaViewController : CodeaViewController
-@property (strong, nonatomic) MXAddon *codeaAddon;
+@property (strong, nonatomic) IBOutlet MXStylusAddon *stylusAddon;
 
 - (IBAction)configure:(id)sender;
 

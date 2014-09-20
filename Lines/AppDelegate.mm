@@ -12,12 +12,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   _navController = (UINavigationController *)self.window.rootViewController;
-  _viewController = (MXCodeaViewController*)(_navController.topViewController); //[[CodeaViewController alloc] init];
-  _codeaAddon = [[MXAddon alloc] init];
-  _viewController.codeaAddon = _codeaAddon;
+  _codeaController = (MXCodeaViewController *)(_navController.topViewController);
+  _stylusAddon = [[MXStylusAddon alloc] init];
+  _codeaController.stylusAddon = _stylusAddon;
   NSString* projectPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Lines.codea"];
-  [self.viewController registerAddon:_codeaAddon];
-  [self.viewController loadProjectAtPath:projectPath];
+  [self.codeaController registerAddon:_stylusAddon];
+  [self.codeaController loadProjectAtPath:projectPath];
   return YES;
 }
 
