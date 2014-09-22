@@ -20,7 +20,6 @@ MXStylusAddon *mxAddonInstance;
   if (self) {
     NSLog(@"Initializing MXStylusAddon %lu", (unsigned long)self.hash);
     [[WacomManager getManager] registerForNotifications:self];
-    _mDevices = [[NSMutableArray alloc] init];
     _value = 0;
   }
   mxAddonInstance = self;
@@ -31,7 +30,9 @@ MXStylusAddon *mxAddonInstance;
 {
   NSLog(@"MXStylusAddon Registering Functions");
   lua_register(L, "mxTest", mxTest);
-  lua_register(L, "stylusPressure", stylusPressure);
+  lua_register(L, "stylusPressure", lua_stylusPressure);
+  lua_register(L, "normalizedStylusPressure", lua_normalizedStylusPressure);
+  lua_register(L, "isStylusConnected", lua_isStylusConnected);
 }
 
 - (void) codea:(CodeaViewController*)controller willCloseLuaState:(struct lua_State*)L
@@ -39,6 +40,18 @@ MXStylusAddon *mxAddonInstance;
   NSLog(@"MXStylusAddon resetting Lua");
 }
 
+- (BOOL)isStylusConnected
+{
+  return [_stylus isCurrentlyConnected];
+}
+
+- (GLfloat) normalizedPressure
+{
+  GLfloat v = (_pressure - _minPressure) / (_maxPressure - _minPressure);
+  return v;
+}
+
+#pragma mark - Lua functions
 
 static int mxTest(struct lua_State *state)
 {
@@ -47,24 +60,49 @@ static int mxTest(struct lua_State *state)
   return 1;
 }
 
-static int stylusPressure(struct lua_State *state)
+static int lua_stylusPressure(struct lua_State *state)
 {
-  lua_pushinteger(state, mxAddonInstance.value);
+  if ([mxAddonInstance isStylusConnected])
+    lua_pushinteger(state, (lua_Integer)mxAddonInstance.pressure);
+  else
+    lua_pushinteger(state, (lua_Integer)0);
   return 1;
 }
+
+static int lua_normalizedStylusPressure(struct lua_State *state)
+{
+  lua_Number v;
+  if ([mxAddonInstance isStylusConnected]) {
+    v = (lua_Number)[mxAddonInstance normalizedPressure];
+    lua_pushnumber(state, v);
+  }
+  else
+    lua_pushnumber(state, (lua_Number)0);
+  return 1;
+}
+
+static int lua_isStylusConnected(struct lua_State *state)
+{
+  lua_pushboolean(state, [mxAddonInstance isStylusConnected]);
+  return 1;
+}
+
+
 
 #pragma mark - Wacom
 - (void) stylusEvent:(WacomStylusEvent *)stylusEvent
 {
-  
+  _pressure = stylusEvent.getPressure;
 }
 
 - (void) deviceDiscovered:(WacomDevice *)device
 {
   NSLog(@"Found device %@", device.description);
-  [self.mDevices addObject:device];
-  [self.stylusTable reloadData];
-  [self.stylusTable setNeedsDisplay];
+  _stylus = device;
+  _minPressure = [device getMinimumPressure];
+  _maxPressure = [device getMaximumPressure];
+  [[WacomManager getManager] stopDeviceDiscovery];
+  [[WacomManager getManager] selectDevice:device];
 }
 
 - (void) discoveryStatePoweredOff
@@ -77,9 +115,7 @@ static int stylusPressure(struct lua_State *state)
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = [[UITableViewCell alloc] init];
-  WacomDevice * selectedDevice = self.mDevices[[indexPath indexAtPosition:1]];
-  NSLog(@"inserting device %@", selectedDevice.description);
-  [[cell textLabel] setText:[selectedDevice getName]];
+  [[cell textLabel] setText:[NSString stringWithFormat:@"%lu", (unsigned long)[indexPath indexAtPosition:1]]];
   return cell;
 }
 
@@ -90,13 +126,12 @@ static int stylusPressure(struct lua_State *state)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.mDevices.count;
+  return 3;
 }
 
 #pragma mark - Outlets
 - (IBAction)searchStylus:(id)sender {
   NSLog(@"searching stylus");
-  [self.mDevices removeAllObjects];
   [[WacomManager getManager] startDeviceDiscovery];
 }
 

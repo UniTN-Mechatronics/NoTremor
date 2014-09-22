@@ -38,7 +38,7 @@ function PBPath:header(n)
     for i, v in ipairs(self.path) do
         desc = desc..string.format("# p=%f t=%f\n", v.x, v.dt)
     end
-    desc = desc.."t t_rel n x y px x_rel touch_state lapse ax ay az\n"
+    desc = desc.."t t_rel n x y px x_rel touch_state lapse ax ay az pressure\n"
     return desc
 end
 
@@ -51,7 +51,11 @@ function PBPath:draw()
     font("ArialMT")
     fontSize(18)
     fill(255)
-    text("n: "..#self.path, WIDTH-20, HEIGHT-10)
+    if isStylusConnected() then
+      text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #self.path), WIDTH-100, HEIGHT-10)
+    else
+      text(string.format("n: %d", #self.path), WIDTH-100, HEIGHT-10)
+    end
     popStyle()
     pushStyle()
     strokeWidth(5)
@@ -61,6 +65,11 @@ function PBPath:draw()
         self.t = {x=WIDTH/2, y=HEIGHT/2}
     end
     translate(self.t.x, self.t.y)
+
+    pushMatrix()
+    if isStylusConnected() then
+      scale(1 + 5 * normalizedStylusPressure())
+    end
     stroke(0)
     line(0, -self.size, 0, self.size)
     line(-self.size, 0, self.size, 0)
@@ -86,14 +95,14 @@ function PBPath:draw()
             ti = ElapsedTime - self.current.epoch - 1
             self.current.prev = self.lapse
             dx = math.abs(self.t.x - self.current.startPos) / math.abs(self.path[1].x - self.current.startPos)
-        table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z})
+        table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure()})
         end
     else
         fill(green)
         ellipse(0, 0, self.size)
         popMatrix()
     end
-
+    popMatrix()
     popStyle()
     
     self.r = (self.t.x / WIDTH) * 256

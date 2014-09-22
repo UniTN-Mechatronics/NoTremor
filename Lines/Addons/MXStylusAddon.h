@@ -10,11 +10,12 @@
 #import <WacomDevice/WacomDeviceFramework.h>
 #import "CodeaAddon.h"
 
-@interface MXStylusAddon : NSObject <CodeaAddon, UITableViewDataSource, WacomDiscoveryCallback,WacomStylusEventCallback>
+@interface MXStylusAddon : NSObject <CodeaAddon, UITableViewDataSource, WacomDiscoveryCallback, WacomStylusEventCallback>
 
 @property long value;
-@property (strong, nonatomic) NSMutableArray *mDevices;
-@property (strong, nonatomic) WacomDevice *currentStylus;
+@property (strong, nonatomic) WacomDevice *stylus;
+@property NSInteger minPressure, maxPressure;
+@property CGFloat pressure;
 
 @property (weak, nonatomic) IBOutlet UITableView *stylusTable;
 - (IBAction)searchStylus:(id)sender;
@@ -22,5 +23,7 @@
 
 static int mxTest(struct lua_State *state);
 static int stylusPressure(struct lua_State *state);
+static int normalizedStylusPressure(struct lua_State *state);
+static int isStylusConnected(struct lua_State *state);
 
 @end

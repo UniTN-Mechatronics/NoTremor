@@ -17,9 +17,11 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self.stylusAddon searchStylus:self];
   //do something like background color, title, etc you self
-    // Do any additional setup after loading the view.
+  // Do any additional setup after loading the view.
 }
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
