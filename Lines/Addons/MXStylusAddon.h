@@ -9,15 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <WacomDevice/WacomDeviceFramework.h>
 #import "CodeaAddon.h"
+#define  appDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 @interface MXStylusAddon : NSObject <CodeaAddon, UITableViewDataSource, WacomDiscoveryCallback, WacomStylusEventCallback>
 
-@property long value;
 @property (strong, nonatomic) WacomDevice *stylus;
 @property NSInteger minPressure, maxPressure;
 @property CGFloat pressure;
 
-@property (weak, nonatomic) IBOutlet UITableView *stylusTable;
 - (IBAction)searchStylus:(id)sender;
 - (IBAction)stopSearchStylus:(id)sender;
 

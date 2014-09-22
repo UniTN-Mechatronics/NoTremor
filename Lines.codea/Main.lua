@@ -32,6 +32,9 @@ function setup()
     touches = {}
     states = {}
     disturbingLines()
+    if STYLUS_ADDON then
+        print("Lua StylusAddon available")
+    end
 end
 
 function startStop(start)

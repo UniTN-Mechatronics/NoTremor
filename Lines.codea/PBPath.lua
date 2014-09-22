@@ -82,6 +82,7 @@ function PBPath:draw()
         end
         rect(-self.size/2, -self.size/2, self.size, self.size)
         popMatrix()
+        popMatrix()
         strokeWidth(4)
         stroke(13, 0, 255, 255)
         if #self.path > 0 then
@@ -101,8 +102,8 @@ function PBPath:draw()
         fill(green)
         ellipse(0, 0, self.size)
         popMatrix()
+        popMatrix()
     end
-    popMatrix()
     popStyle()
     
     self.r = (self.t.x / WIDTH) * 256

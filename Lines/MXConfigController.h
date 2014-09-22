@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Addons/MXStylusAddon.h"
 
-@interface MXConfigController : UIViewController
+@interface MXConfigController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSMutableArray *logFiles;
+@property (strong, nonatomic) NSMutableArray *movieFiles;
 
 @end

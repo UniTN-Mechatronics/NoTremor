@@ -12,7 +12,6 @@
 
 @interface MXCodeaViewController : CodeaViewController
 @property (strong, nonatomic) IBOutlet MXStylusAddon *stylusAddon;
-
-- (IBAction)configure:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *stylusButton;
 
 @end

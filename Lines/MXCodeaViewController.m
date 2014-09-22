@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 @interface MXCodeaViewController ()
+- (IBAction)connectStylus:(id)sender;
 
 @end
 
@@ -34,14 +35,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   NSLog(@"segue");
   [[appDelegate stylusAddon] searchStylus:self];
-  [appDelegate stylusAddon].value++;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
 
-- (IBAction)configure:(id)sender {
-  NSLog(@"pinch action");
+- (IBAction)connectStylus:(id)sender {
+  [[appDelegate stylusAddon] searchStylus:self];
 }
-
 @end

@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 UniTN. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "MXStylusAddon.h"
 #import "lua.h"
+#import "AppDelegate.h"
 
 MXStylusAddon *mxAddonInstance;
 
@@ -20,7 +22,6 @@ MXStylusAddon *mxAddonInstance;
   if (self) {
     NSLog(@"Initializing MXStylusAddon %lu", (unsigned long)self.hash);
     [[WacomManager getManager] registerForNotifications:self];
-    _value = 0;
   }
   mxAddonInstance = self;
   return self;
@@ -28,6 +29,8 @@ MXStylusAddon *mxAddonInstance;
 
 - (void) codea:(CodeaViewController*)controller didCreateLuaState:(struct lua_State*)L
 {
+  lua_pushboolean(L, YES);
+  lua_setglobal(L, "STYLUS_ADDON");
   NSLog(@"MXStylusAddon Registering Functions");
   lua_register(L, "mxTest", mxTest);
   lua_register(L, "stylusPressure", lua_stylusPressure);
@@ -103,6 +106,9 @@ static int lua_isStylusConnected(struct lua_State *state)
   _maxPressure = [device getMaximumPressure];
   [[WacomManager getManager] stopDeviceDiscovery];
   [[WacomManager getManager] selectDevice:device];
+  [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus connected"];
+  [[[appDelegate codeaController] stylusButton] setEnabled:NO];
+
 }
 
 - (void) discoveryStatePoweredOff
@@ -132,6 +138,8 @@ static int lua_isStylusConnected(struct lua_State *state)
 #pragma mark - Outlets
 - (IBAction)searchStylus:(id)sender {
   NSLog(@"searching stylus");
+  if (_stylus.isCurrentlyConnected)
+    [[WacomManager getManager] deselectDevice:_stylus];
   [[WacomManager getManager] startDeviceDiscovery];
 }
 
