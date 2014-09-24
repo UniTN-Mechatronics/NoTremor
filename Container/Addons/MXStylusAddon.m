@@ -96,6 +96,8 @@ static int lua_isStylusConnected(struct lua_State *state)
 - (void) stylusEvent:(WacomStylusEvent *)stylusEvent
 {
   self.pressure = stylusEvent.getPressure;
+//  TouchManager *tm = [[WacomManager getManager] currentlyTrackedTouches];
+//  NSLog(@"r=%f", tm.theStylusTouch.associatedTouch.majorRadius);
 }
 
 - (void) deviceDiscovered:(WacomDevice *)device
@@ -104,8 +106,8 @@ static int lua_isStylusConnected(struct lua_State *state)
   self.stylus = device;
   self.minPressure = [device getMinimumPressure];
   self.maxPressure = [device getMaximumPressure];
-  [[WacomManager getManager] stopDeviceDiscovery];
   [[WacomManager getManager] selectDevice:device];
+  [self stopSearchStylus:self];
   [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus connected"];
   [[[appDelegate codeaController] stylusButton] setEnabled:NO];
 
@@ -127,7 +129,7 @@ static int lua_isStylusConnected(struct lua_State *state)
 - (IBAction)stopSearchStylus:(id)sender
 {
   NSLog(@"stop searching stylus");
-  [[WacomManager getManager] stopDeviceDiscovery];
+  [[WacomManager getManager]  stopDeviceDiscovery];
 }
 
 

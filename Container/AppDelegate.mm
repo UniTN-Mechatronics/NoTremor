@@ -16,8 +16,9 @@
   _codeaController = (MXCodeaViewController *)(_navController.topViewController);
   _stylusAddon = [[MXStylusAddon alloc] init];
   _codeaController.stylusAddon = _stylusAddon;
-  NSString* projectPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Lines.codea"];
-  NSLog(@"Loading %@", projectPath);
+  NSString* projectName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CodeaFolder"];
+  NSLog(@"Loading Codea project %@", projectName);
+  NSString* projectPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:projectName];
   [self.codeaController registerAddon:_stylusAddon];
   [self.codeaController loadProjectAtPath:projectPath];
   return YES;
@@ -30,6 +31,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
   [_stylusAddon stopSearchStylus:self];
+  if (_stylusAddon.stylus)
+    [[WacomManager getManager] deselectDevice:_stylusAddon.stylus];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -39,10 +42,14 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+  if (_stylusAddon.stylus)
+    [[WacomManager getManager] selectDevice:_stylusAddon.stylus];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+  if (_stylusAddon.stylus)
+    [[WacomManager getManager] deselectDevice:_stylusAddon.stylus];
 }
 
 @end

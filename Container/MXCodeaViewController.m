@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self.stylusAddon searchStylus:self];
+  //[self.stylusAddon searchStylus:self];
   //do something like background color, title, etc you self
   // Do any additional setup after loading the view.
 }
@@ -40,6 +40,7 @@
 }
 
 - (IBAction)connectStylus:(id)sender {
+  [[appDelegate stylusAddon] stopSearchStylus:self];
   [[appDelegate stylusAddon] searchStylus:self];
 }
 @end
