@@ -29,9 +29,9 @@ MXStylusAddon *mxAddonInstance;
 
 - (void) codea:(CodeaViewController*)controller didCreateLuaState:(struct lua_State*)L
 {
+  NSLog(@"MXStylusAddon Registering Functions");
   lua_pushboolean(L, YES);
   lua_setglobal(L, "STYLUS_ADDON");
-  NSLog(@"MXStylusAddon Registering Functions");
   lua_register(L, "mxTest", mxTest);
   lua_register(L, "stylusPressure", lua_stylusPressure);
   lua_register(L, "normalizedStylusPressure", lua_normalizedStylusPressure);

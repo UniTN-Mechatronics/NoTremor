@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#ifndef LUA_SCRIPTS
+  #define LUA_SCRIPTS "Lines.codea"
+#else
+#define SCRIPT_NAME(n) #n
+#endif
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
