@@ -11,6 +11,7 @@
 		881CFFE619CC55DD00A39D83 /* WacomDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE519CC55DD00A39D83 /* WacomDevice.framework */; };
 		881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */; };
 		881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
+		8827481619D30889000B4CB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8827481519D30889000B4CB1 /* MediaPlayer.framework */; };
 		88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXStylusAddon.m */; };
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
 		DB0DC0AE18C459EC005F4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DC0AD18C459EC005F4723 /* Images.xcassets */; };
@@ -60,6 +61,7 @@
 		881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		881CFFE919CC5E1100A39D83 /* MXConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXConfigController.h; sourceTree = "<group>"; };
 		881CFFEA19CC5E1100A39D83 /* MXConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXConfigController.m; sourceTree = "<group>"; };
+		8827481519D30889000B4CB1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		88342D9F19CB3D5F0068F865 /* MXStylusAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXStylusAddon.h; sourceTree = "<group>"; };
 		88342DA019CB3D5F0068F865 /* MXStylusAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXStylusAddon.m; sourceTree = "<group>"; };
 		88342DA219CB3EEB0068F865 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8827481619D30889000B4CB1 /* MediaPlayer.framework in Frameworks */,
 				881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */,
 				DB5E404418CD80570001CC1F /* Social.framework in Frameworks */,
 				DB0DC0BA18C4608E005F4723 /* Accelerate.framework in Frameworks */,
@@ -175,6 +178,7 @@
 		DB8A004516F2DBDA005F87A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8827481519D30889000B4CB1 /* MediaPlayer.framework */,
 				881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */,
 				881CFFE519CC55DD00A39D83 /* WacomDevice.framework */,
 				DB5E404318CD80570001CC1F /* Social.framework */,
