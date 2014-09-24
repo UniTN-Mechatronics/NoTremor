@@ -11,7 +11,7 @@
 #import "lua.h"
 #import "AppDelegate.h"
 
-MXStylusAddon *mxAddonInstance;
+static MXStylusAddon *mxAddonInstance;
 
 
 @implementation MXStylusAddon
@@ -95,15 +95,15 @@ static int lua_isStylusConnected(struct lua_State *state)
 #pragma mark - Wacom
 - (void) stylusEvent:(WacomStylusEvent *)stylusEvent
 {
-  _pressure = stylusEvent.getPressure;
+  self.pressure = stylusEvent.getPressure;
 }
 
 - (void) deviceDiscovered:(WacomDevice *)device
 {
   NSLog(@"Found device %@", device.description);
-  _stylus = device;
-  _minPressure = [device getMinimumPressure];
-  _maxPressure = [device getMaximumPressure];
+  self.stylus = device;
+  self.minPressure = [device getMinimumPressure];
+  self.maxPressure = [device getMaximumPressure];
   [[WacomManager getManager] stopDeviceDiscovery];
   [[WacomManager getManager] selectDevice:device];
   [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus connected"];
