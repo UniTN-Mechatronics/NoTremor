@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#ifndef LUA_SCRIPTS
-  #define LUA_SCRIPTS "Lines.codea"
-#else
-#define SCRIPT_NAME(n) #n
-#endif
 
 @implementation AppDelegate
 
@@ -22,6 +17,7 @@
   _stylusAddon = [[MXStylusAddon alloc] init];
   _codeaController.stylusAddon = _stylusAddon;
   NSString* projectPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Lines.codea"];
+  NSLog(@"Loading %@", projectPath);
   [self.codeaController registerAddon:_stylusAddon];
   [self.codeaController loadProjectAtPath:projectPath];
   return YES;
@@ -33,10 +29,12 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+  [_stylusAddon stopSearchStylus:self];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+  [_stylusAddon searchStylus:self];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

@@ -11,7 +11,7 @@
 #import "CodeaAddon.h"
 #define  appDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
-@interface MXStylusAddon : NSObject <CodeaAddon, UITableViewDataSource, WacomDiscoveryCallback, WacomStylusEventCallback>
+@interface MXStylusAddon : NSObject <CodeaAddon, WacomDiscoveryCallback, WacomStylusEventCallback>
 
 @property (strong, nonatomic) WacomDevice *stylus;
 @property NSInteger minPressure, maxPressure;

@@ -113,27 +113,8 @@ static int lua_isStylusConnected(struct lua_State *state)
 
 - (void) discoveryStatePoweredOff
 {
-  
 }
 
-#pragma mark - UITableView dataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UITableViewCell *cell = [[UITableViewCell alloc] init];
-  [[cell textLabel] setText:[NSString stringWithFormat:@"%lu", (unsigned long)[indexPath indexAtPosition:1]]];
-  return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return 3;
-}
 
 #pragma mark - Outlets
 - (IBAction)searchStylus:(id)sender {
