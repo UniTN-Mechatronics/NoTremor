@@ -10,9 +10,18 @@
 #import "MXConfigController.h"
 #import "AppDelegate.h"
 
+typedef enum 
+{
+  sectionLogs = 0,
+  sectionMovies
+} tableSections;
+
 @interface MXConfigController ()
 @property NSArray *sectionTitles;
 @property NSString *documentsDir;
+@property (strong, atomic) UIDocumentInteractionController* docController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
+- (IBAction)shareFile:(id)sender;
 @end
 
 @implementation MXConfigController
@@ -21,7 +30,8 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   _sectionTitles = @[@"Log files", @"Videos"];
-
+  self.docController = [[UIDocumentInteractionController alloc] init];
+  [self.docController setDelegate:self];
   self.documentsDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
   NSFileManager *manager = [NSFileManager defaultManager];
   NSArray *allItems = [manager contentsOfDirectoryAtPath:self.documentsDir error:nil];
@@ -72,10 +82,10 @@
 {
   NSInteger r = 0;
   switch (section) {
-    case 0:
+    case sectionLogs:
       r = _logFiles.count;
       break;
-    case 1:
+    case sectionMovies:
       r = _movieFiles.count;
       break;
     default:
@@ -95,10 +105,10 @@
 - (NSString *)fileNameForIndexPath:(NSIndexPath *)indexPath
 {
   switch (indexPath.section) {
-    case 0:
+    case sectionLogs:
       return _logFiles[indexPath.row];
       break;
-    case 1:
+    case sectionMovies:
       return _movieFiles[indexPath.row];
       break;
     default:
@@ -112,19 +122,23 @@
   return [self.documentsDir stringByAppendingPathComponent:[self fileNameForIndexPath:indexPath]];
 }
 
+- (NSURL *)fileURLForIndexPath:(NSIndexPath *)indexPath
+{
+  return [NSURL fileURLWithPath:[self filePathForIndexPath:indexPath]];
+}
+
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSString *filePath = [self filePathForIndexPath:indexPath];
-  if (indexPath.section == 0) {
-    NSLog(@"opening %@", filePath);
+  if (indexPath.section == sectionLogs) {
     self.textView.text = [NSString stringWithContentsOfFile:filePath
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
   }
 
-  else if (indexPath.section == 1) {
+  else if (indexPath.section == sectionMovies) {
     NSURL    *fileURL  = [NSURL fileURLWithPath:filePath];
     MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
     moviePlayerViewController.view.frame = self.view.bounds;
@@ -138,7 +152,7 @@
   else {
     self.textView.text = @"Currently unsuported";
   }
-  [[tableView cellForRowAtIndexPath:indexPath] setEditing:YES animated:YES];
+  [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:NO];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,18 +167,17 @@
   }
 }
 
-
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
                                                                           title:@"Delete"
                                                                         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                           NSString *filePath = [self filePathForIndexPath:indexPath];
-                                                                          if (indexPath.section == 0) {
+                                                                          if (indexPath.section == sectionLogs) {
                                                                             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                                                                             [self.logFiles removeObjectAtIndex:indexPath.row];
                                                                           }
-                                                                          else if (indexPath.section == 1) {
+                                                                          else if (indexPath.section == sectionMovies) {
                                                                             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                                                                             [self.movieFiles removeObjectAtIndex:indexPath.row];
                                                                           }
@@ -174,14 +187,26 @@
   UITableViewRowAction *shareAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
                                                                          title:@"Share"
                                                                        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-                                                                         NSString *filePath = [self filePathForIndexPath:indexPath];
-                                                                         UIDocumentInteractionController* docController = [[UIDocumentInteractionController alloc] init];
-                                                                         docController.name = filePath;
-                                                                         NSLog(@"Sharing %@", filePath);
-                                                                         [docController presentPreviewAnimated:YES];
+                                                                         NSURL *fileURL = [self fileURLForIndexPath:indexPath];
+                                                                         [self.docController setURL:fileURL];
+                                                                         [self.docController setDelegate:self];
+                                                                         [self.docController presentOpenInMenuFromBarButtonItem:self.shareButton animated:YES];
                                                                        }];
   return @[deleteAction, shareAction];
 }
 
 
+#pragma mark - UIDocumentInteractionController delegate
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller willBeginSendingToApplication:(NSString *)application
+{
+  
+}
+
+
+#pragma mark IBActions
+- (IBAction)shareFile:(id)sender {
+  NSURL *fileURL = [self fileURLForIndexPath:[_tableView indexPathForSelectedRow]];
+  [_docController setURL:fileURL];
+  [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
+}
 @end

@@ -121,11 +121,18 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Data files" id="7wG-gG-N0f"/>
+                    <navigationItem key="navigationItem" title="Data files" id="7wG-gG-N0f">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="Uz4-PK-iHM">
+                            <connections>
+                                <action selector="shareFile:" destination="yp3-sU-Xuj" id="m8M-Z0-ogW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="shareButton" destination="Uz4-PK-iHM" id="Fes-0M-0nS"/>
                         <outlet property="tableView" destination="m7R-Je-OlT" id="hAd-pU-ROl"/>
                         <outlet property="textView" destination="4Qi-f1-fCz" id="kQw-be-8p4"/>
                     </connections>
