@@ -21,6 +21,7 @@
   NSString* projectPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:projectName];
   [self.codeaController registerAddon:_stylusAddon];
   [self.codeaController loadProjectAtPath:projectPath];
+  _codeaController.title = [projectName componentsSeparatedByString:@"."][0];
   return YES;
 }
 
