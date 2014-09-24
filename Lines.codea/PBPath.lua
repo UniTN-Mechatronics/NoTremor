@@ -191,11 +191,16 @@ end
 
 function PBPath:fname()
     self.runid = readLocalData("runid", 0)
-    return os.getenv("HOME").."/Documents/log_lines_"..self.runid..".txt"
+    if STYLUS_ADDON then
+        return os.getenv("HOME").."/Documents/log_lines_"..self.runid..".txt"
+    else
+        return os.getenv("HOME").."/Documents/Dropbox.assets/log_lines_"..self.runid..".txt"
+    end
 end
 
 function PBPath:rand()
     --return self.minDelay + math.random() * (self.avgDelay - self.minDelay)
     return (poisson(self.avgDelay*10.0, self.minDelay*10.0))/10.0
 end
+
 

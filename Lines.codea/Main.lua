@@ -18,23 +18,36 @@ function setup()
     recordVideo = readLocalData("recordVideo", false)
     subject = readLocalData("subject", "Unknown")
     camera = readLocalData("camera", false)
+    cameraPos = readLocalData("cameraPos", 0)
+    camOnTop = readLocalData("camOnTop", true)
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
     parameter.integer("nLines", 0, 10, nLines, disturbingLines)
     parameter.integer("steps", 1, 50, steps, function() saveLocalData("steps", steps) end)
-    parameter.integer("avgDelay", 0, 20, path.avgDelay, function() path.avgDelay = avgDelay; saveLocalData("avgDelay", avgDelay) end)
-    parameter.integer("minDelay", 0, 20, path.minDelay, function() path.minDelay = minDelay; saveLocalData("minDelay", minDelay) end)
+    parameter.number("avgDelay", 0, 5, path.avgDelay, function() avgDelay = round(avgDelay, 1); path.avgDelay = avgDelay; saveLocalData("avgDelay", avgDelay) end)
+    parameter.number("minDelay", 0, 5, path.minDelay, function() minDelay = round(minDelay, 1); path.minDelay = minDelay; saveLocalData("minDelay", minDelay) end)
     parameter.integer("size", 0, 100, size, function() path.size = size; saveLocalData("size", size) end)
     parameter.boolean("animateBackground", animateBackground, function() saveLocalData("animateBackground", animateBackground) end)
     parameter.boolean("recordVideo", recordVideo, function() saveLocalData("recordVideo", recordVideo) end)
     parameter.boolean("camera", camera, function() saveLocalData("camera", camera) end)
+    parameter.integer("cameraPos", 0, HEIGHT, cameraPos, function() saveLocalData("cameraPos",  cameraPos) end)
+    parameter.boolean("camOnTop", camOnTop, function() saveLocalData("camOnTop", camOnTop) end)
     buttonStart.action = startStop
     touches = {}
     states = {}
     disturbingLines()
     if STYLUS_ADDON then
         print("Lua StylusAddon available")
+    else
+        stylusPressure = function() return 0; end
+        normalizedStylusPressure = function() return 0; end
+        isStylusConnected = function() return false; end
     end
+end
+
+function round(num, idp)
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult) / mult
 end
 
 function startStop(start)
@@ -58,6 +71,14 @@ function disturbingLines()
     end
 end
 
+
+function drawCamera(control)
+    if camera and control then
+        cameraSource(CAMERA_FRONT)
+        sprite(CAMERA, WIDTH/2, HEIGHT/2+cameraPos, WIDTH)
+    end
+end
+
 -- This function gets called once every frame
 function draw()
     -- This sets a dark background color 
@@ -66,10 +87,8 @@ function draw()
         else
         background(200)
     end
-    if camera then
-        cameraSource(CAMERA_FRONT)
-        sprite(CAMERA, WIDTH/2, HEIGHT/2, WIDTH)
-    end
+    
+    drawCamera(not camOnTop)
 
     if path.animating then
         for i,l in ipairs(disturbingLinesTab) do
@@ -78,8 +97,10 @@ function draw()
     else
         buttonStart.displayName = "Start test"
     end
-    buttonStart:draw()
+    
     path:draw()
+    drawCamera(camOnTop)
+    buttonStart:draw()
 end
 
 function touched(touch)
@@ -101,3 +122,5 @@ function poisson(lambda, cut)
     until k - 1 >= cut
     return k - 1
 end
+
+

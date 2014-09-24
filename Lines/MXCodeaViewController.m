@@ -39,7 +39,6 @@
     // Pass the selected object to the new view controller.
 }
 
-
 - (IBAction)connectStylus:(id)sender {
   [[appDelegate stylusAddon] searchStylus:self];
 }

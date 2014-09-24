@@ -83,6 +83,26 @@
   return r;
 }
 
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [[UITableViewCell alloc] init];
+  switch (indexPath.section) {
+    case 0:
+      [[cell textLabel] setText:_logFiles[indexPath.row]];
+      break;
+    case 1:
+      [[cell textLabel] setText:_movieFiles[indexPath.row]];
+      break;
+    default:
+      break;
+  }
+  return cell;
+}
+
+
+#pragma mark - UITableView delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == 0) {
@@ -128,25 +148,17 @@
                                                                           }
                                                                           [tableView reloadData];
                                                                         }];
-  return [NSArray arrayWithObject:deleteAction];
+  
+//  UITableViewRowAction *shareAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+//                                                                         title:@"Share"
+//                                                                       handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+//                                                                         NSString *fileName = [self.documentsDir stringByAppendingPathComponent:_logFiles[indexPath.row]];
+//                                                                         UIDocumentInteractionController* docController = [[UIDocumentInteractionController alloc] init];
+//                                                                         docController.name = fileName;
+//                                                                         [docController presentPreviewAnimated:YES];
+//                                                                       }];
+  return @[deleteAction];
 }
 
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UITableViewCell *cell = [[UITableViewCell alloc] init];
-  switch (indexPath.section) {
-    case 0:
-      [[cell textLabel] setText:_logFiles[indexPath.row]];
-      break;
-    case 1:
-      [[cell textLabel] setText:_movieFiles[indexPath.row]];
-      break;
-    default:
-      break;
-  }
-  return cell;
-}
 
 @end
