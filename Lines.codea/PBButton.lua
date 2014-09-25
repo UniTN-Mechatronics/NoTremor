@@ -14,10 +14,10 @@ function PBButton:draw()
     -- Codea does not automatically call this method
     pushStyle()
     if self.graphic then
-        spriteMode(CORNER)
+        spriteMode(CENTER)
         local w = 150
         local h = 50
-        sprite(self.displayName, 10, 50, 150)
+        sprite(self.displayName, self.pos.x, self.pos.y, w)
         self.size = vec2(w+10,h+10)
     else
         fill(self.color)

@@ -2,15 +2,17 @@
 
 -- Use this function to perform your initial setup
 function setup()
-    -- displayMode(FULLSCREEN)
+    displayMode(OVERLAY)
     supportedOrientations(LANDSCAPE_ANY)
     path = PBPath(WIDTH/2, HEIGHT/2)
     buttonStart = PBButton("Start test")
     path.avgDelay = readLocalData("avgDelay", 5)
     path.minDelay = readLocalData("minDelay", 1) 
     path.p = vec2(WIDTH/2, HEIGHT/2)
-    buttonStart.pos.x = 75
-    buttonStart.pos.y = 75
+    buttonStart.pos.x = WIDTH - 90
+    buttonStart.pos.y = 40
+    hideNavbar = false
+
     size = readLocalData("size", 20)
     steps = readLocalData("steps", 2) 
     nLines = readLocalData("nLines", 2)
@@ -20,6 +22,7 @@ function setup()
     camera = readLocalData("camera", false)
     cameraPos = readLocalData("cameraPos", 0)
     camOnTop = readLocalData("camOnTop", true)
+
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
     parameter.integer("nLines", 0, 10, nLines, disturbingLines)
@@ -32,6 +35,8 @@ function setup()
     parameter.boolean("camera", camera, function() saveLocalData("camera", camera) end)
     parameter.integer("cameraPos", 0, HEIGHT, cameraPos, function() saveLocalData("cameraPos",  cameraPos) end)
     parameter.boolean("camOnTop", camOnTop, function() saveLocalData("camOnTop", camOnTop) end)
+    parameter.boolean("hideNavbar", false)
+
     buttonStart.action = startStop
     touches = {}
     states = {}

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) WacomDevice *stylus;
 @property NSInteger minPressure, maxPressure;
 @property CGFloat pressure;
+@property struct lua_State *lua;
 
 - (IBAction)searchStylus:(id)sender;
 - (IBAction)stopSearchStylus:(id)sender;

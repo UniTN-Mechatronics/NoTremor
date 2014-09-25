@@ -24,11 +24,15 @@ static MXStylusAddon *mxAddonInstance;
     [[WacomManager getManager] registerForNotifications:self];
   }
   mxAddonInstance = self;
+  _lua = nil;
   return self;
 }
 
 - (void) codea:(CodeaViewController*)controller didCreateLuaState:(struct lua_State*)L
 {
+  if (! _lua) {
+    _lua = L;
+  }
   NSLog(@"MXStylusAddon Registering Functions");
   lua_pushboolean(L, YES);
   lua_setglobal(L, "STYLUS_ADDON");
@@ -41,6 +45,21 @@ static MXStylusAddon *mxAddonInstance;
 - (void) codea:(CodeaViewController*)controller willCloseLuaState:(struct lua_State*)L
 {
   NSLog(@"MXStylusAddon resetting Lua");
+}
+
+- (void) codeaWillDrawFrame:(CodeaViewController *)controller withDelta:(CGFloat)deltaTime
+{
+  BOOL hideNavbar;
+  lua_getglobal(_lua, "hideNavbar");
+  if (lua_isnil(_lua, 1)) {
+    hideNavbar = NO;
+  }
+  else {
+    hideNavbar = lua_toboolean(_lua, 1);
+  }
+  lua_pop(_lua, 1);
+  if ([[appDelegate navController] navigationBar].hidden != hideNavbar)
+    [[appDelegate navController] setNavigationBarHidden:hideNavbar animated:YES];
 }
 
 - (BOOL)isStylusConnected

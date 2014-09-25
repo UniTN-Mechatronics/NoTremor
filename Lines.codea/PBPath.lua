@@ -139,11 +139,13 @@ function PBPath:endAnimation()
         self.dataBuffer = {}
         saveLocalData("runid", self.runid + 1)
         print("Saved file "..self.file)
+        hideNavbar = false
     end
 end
 
 function PBPath:makePath(n)
     displayMode(FULLSCREEN)
+    hideNavbar = true
     if recordVideo then
         startRecording()
     end

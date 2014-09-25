@@ -1,3 +1,5 @@
 Libs/*.a
 Libs/*.gz
 xcuserdata
+DerivedData
+*.xccheckout
