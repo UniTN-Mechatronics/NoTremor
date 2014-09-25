@@ -31,8 +31,8 @@ function PBPath:header(n)
     local desc = "# Lines test number "..(readLocalData("runid", 0) + 1)
     desc = desc.."\n# date: "..os.date()
     desc = desc.."\n# steps: "..self.steps
-    desc = desc.."\n# min delay (0.1 s): "..self.minDelay
-    desc = desc.."\n# max delay: (0.1 s)"..self.avgDelay
+    desc = desc.."\n# min delay (s): "..self.minDelay
+    desc = desc.."\n# max delay: (s)"..self.avgDelay
     desc = desc.."\n# disturbing lines: "..nLines
     desc = desc.."\n# subject name: "..subject.."\n"
     for i, v in ipairs(self.path) do
@@ -46,17 +46,6 @@ function PBPath:draw()
     -- Codea does not automatically call this method
     local red = color(243, 12, 40, 255)
     local green = color(65, 189, 45, 255)
-    pushStyle()
-    textAlign(RIGHT)
-    font("ArialMT")
-    fontSize(18)
-    fill(255)
-    if isStylusConnected() then
-      text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #self.path), WIDTH-100, HEIGHT-10)
-    else
-      text(string.format("n: %d", #self.path), WIDTH-100, HEIGHT-10)
-    end
-    popStyle()
     pushStyle()
     strokeWidth(5)
     pushMatrix()

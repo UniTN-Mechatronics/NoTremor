@@ -72,10 +72,27 @@ function disturbingLines()
 end
 
 
-function drawCamera(control)
-    if camera and control then
+function drawCamera(active)
+    if camera and active then
         cameraSource(CAMERA_FRONT)
         sprite(CAMERA, WIDTH/2, HEIGHT/2+cameraPos, WIDTH)
+        pushStyle()
+        fill(0)
+        font("Courier")
+        textMode(CORNER)
+        text(string.format("%s @ %s", subject, os.date()), 10, HEIGHT-20)
+
+        textAlign(RIGHT)
+        font("Courier-Bold")
+        fontSize(18)
+        fill(0, 0, 0, 255)
+        if isStylusConnected() then
+            text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #path.path), WIDTH-110, HEIGHT-20)
+            else
+            text(string.format("n: %d", #path.path), WIDTH-50, HEIGHT-20)
+        end
+
+        popStyle()
     end
 end
 

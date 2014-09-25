@@ -129,7 +129,7 @@
 		DB8A005216F2DBDA005F87A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DB8A005416F2DBDA005F87A6 /* Container-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Container-Prefix.pch"; sourceTree = "<group>"; };
 		DB8A005516F2DBDA005F87A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		DB8A005616F2DBDA005F87A6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		DB8A005616F2DBDA005F87A6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; wrapsLines = 1; };
 		DB8A006316F2E019005F87A6 /* libcodea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcodea.a; path = Libs/libcodea.a; sourceTree = "<group>"; };
 		DB8A006516F2E019005F87A6 /* libtools.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtools.a; path = Libs/libtools.a; sourceTree = "<group>"; };
 		DB8A006616F2E019005F87A6 /* RuntimeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = RuntimeResources.bundle; path = Libs/RuntimeResources.bundle; sourceTree = "<group>"; };
@@ -414,6 +414,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = MyCompany;
 				TargetAttributes = {
+					8827481719D32872000B4CB1 = {
+						DevelopmentTeam = 5FJDWFUQCL;
+					};
 					DB8A004216F2DBDA005F87A6 = {
 						DevelopmentTeam = 5FJDWFUQCL;
 					};
