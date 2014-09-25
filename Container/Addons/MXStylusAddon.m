@@ -49,15 +49,12 @@ static MXStylusAddon *mxAddonInstance;
 
 - (void) codeaWillDrawFrame:(CodeaViewController *)controller withDelta:(CGFloat)deltaTime
 {
-  BOOL hideNavbar;
+  BOOL hideNavbar = NO;
   lua_getglobal(_lua, "hideNavbar");
-  if (lua_isnil(_lua, 1)) {
-    hideNavbar = NO;
-  }
-  else {
+  if (!lua_isnil(_lua, -1))
     hideNavbar = lua_toboolean(_lua, 1);
-  }
-  lua_pop(_lua, 1);
+
+  //lua_pop(_lua, 1); //Seems to randmoly crash Lua
   if ([[appDelegate navController] navigationBar].hidden != hideNavbar)
     [[appDelegate navController] setNavigationBarHidden:hideNavbar animated:YES];
 }
