@@ -93,6 +93,12 @@ static int lua_isStylusConnected(struct lua_State *state)
 
 
 #pragma mark - Wacom
+
+- (void) discoveryStatePoweredOff
+{
+  
+}
+
 - (void) stylusEvent:(WacomStylusEvent *)stylusEvent
 {
   self.pressure = stylusEvent.getPressure;
@@ -108,22 +114,37 @@ static int lua_isStylusConnected(struct lua_State *state)
   self.maxPressure = [device getMaximumPressure];
   [[WacomManager getManager] selectDevice:device];
   [self stopSearchStylus:self];
-  [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus connected"];
+  [[[appDelegate codeaController] stylusButton] setTitle:@"Found Stylus"];
   [[[appDelegate codeaController] stylusButton] setEnabled:NO];
 
 }
 
-- (void) discoveryStatePoweredOff
+- (void) deviceConnected:(WacomDevice *)device
 {
+  [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus Connected"];
+}
+
+- (void) deviceDisconnected:(WacomDevice *)device
+{
+  [[[appDelegate codeaController] stylusButton] setEnabled:YES];
+  [[[appDelegate codeaController] stylusButton] setTitle:@"Connect Stylus"];
 }
 
 
 #pragma mark - Outlets
 - (IBAction)searchStylus:(id)sender {
-  NSLog(@"searching stylus");
-  if (_stylus.isCurrentlyConnected)
-    [[WacomManager getManager] deselectDevice:_stylus];
-  [[WacomManager getManager] startDeviceDiscovery];
+  if ([[WacomManager getManager] isDiscoveryInProgress]) {
+    [self stopSearchStylus:self];
+    [[[appDelegate codeaController] stylusButton] setTitle:@"Connect Stylus"];
+  }
+  else {
+    NSLog(@"searching stylus");
+    if (_stylus.isCurrentlyConnected)
+      [[WacomManager getManager] deselectDevice:_stylus];
+    
+    [[[appDelegate codeaController] stylusButton] setTitle:@"Searching Stylus"];
+    [[WacomManager getManager] startDeviceDiscovery];
+  }
 }
 
 - (IBAction)stopSearchStylus:(id)sender

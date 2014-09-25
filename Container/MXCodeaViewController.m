@@ -40,7 +40,6 @@
 }
 
 - (IBAction)connectStylus:(id)sender {
-  [[appDelegate stylusAddon] stopSearchStylus:self];
   [[appDelegate stylusAddon] searchStylus:self];
 }
 @end

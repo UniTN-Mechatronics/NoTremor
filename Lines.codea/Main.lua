@@ -43,6 +43,7 @@ function setup()
         normalizedStylusPressure = function() return 0; end
         isStylusConnected = function() return false; end
     end
+    buttonStart.graphic = true
 end
 
 function round(num, idp)
@@ -53,10 +54,10 @@ end
 function startStop(start)
     if start then
         path:makePath(steps)
-        buttonStart.displayName = "Stop"
+        buttonStart.displayName = "MX:stop"
     else
         path:endAnimation()
-        buttonStart.displayName = "Start test"
+        buttonStart.displayName = "MS:start"
         disturbingLines() -- reenable tweens
     end
 end
@@ -112,7 +113,7 @@ function draw()
             l:draw()
         end
     else
-        buttonStart.displayName = "Start test"
+        buttonStart.displayName = "MX:start"
     end
     
     path:draw()
