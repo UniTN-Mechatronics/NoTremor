@@ -13,6 +13,9 @@
 
 static MXStylusAddon *mxAddonInstance;
 
+@interface MXStylusAddon ()
+@property BOOL luaReceiveEnabled;
+@end
 
 @implementation MXStylusAddon
 
@@ -40,23 +43,29 @@ static MXStylusAddon *mxAddonInstance;
   lua_register(L, "stylusPressure", lua_stylusPressure);
   lua_register(L, "normalizedStylusPressure", lua_normalizedStylusPressure);
   lua_register(L, "isStylusConnected", lua_isStylusConnected);
+  self.luaReceiveEnabled = YES;
 }
 
 - (void) codea:(CodeaViewController*)controller willCloseLuaState:(struct lua_State*)L
 {
   NSLog(@"MXStylusAddon resetting Lua");
+  self.luaReceiveEnabled = NO;
 }
 
 - (void) codeaWillDrawFrame:(CodeaViewController *)controller withDelta:(CGFloat)deltaTime
 {
+  if (!self.luaReceiveEnabled) {
+    return;
+  }
   BOOL hideNavbar = NO;
-  lua_getglobal(_lua, "hideNavbar");
-  if (!lua_isnil(_lua, -1))
-    hideNavbar = lua_toboolean(_lua, 1);
-
-  //lua_pop(_lua, 1); //Seems to randmoly crash Lua
+  if (_lua && lua_gettop(_lua) == 0) {
+    lua_getglobal(_lua, "hideNavbar");
+    if (!lua_isnil(_lua, -1))
+      hideNavbar = lua_toboolean(_lua, 1);
+    lua_pop(_lua, 1);
+  }
   if ([[appDelegate navController] navigationBar].hidden != hideNavbar)
-    [[appDelegate navController] setNavigationBarHidden:hideNavbar animated:YES];
+      [[appDelegate navController] setNavigationBarHidden:hideNavbar animated:YES];
 }
 
 - (BOOL)isStylusConnected
@@ -105,7 +114,6 @@ static int lua_isStylusConnected(struct lua_State *state)
   lua_pushboolean(state, [mxAddonInstance isStylusConnected]);
   return 1;
 }
-
 
 
 #pragma mark - Wacom
