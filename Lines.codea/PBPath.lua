@@ -33,7 +33,7 @@ function PBPath:header(n)
     desc = desc.."\n# steps: "..self.steps
     desc = desc.."\n# min delay (s): "..self.minDelay
     desc = desc.."\n# max delay: (s)"..self.avgDelay
-    desc = desc.."\n# disturbing lines: "..nLines
+    desc = desc.."\n# disturbing lines: "..disturbingLines
     desc = desc.."\n# subject name: "..subject.."\n"
     for i, v in ipairs(self.path) do
         desc = desc..string.format("# p=%f t=%f\n", v.x, v.dt)

@@ -33,9 +33,7 @@ static MXStylusAddon *mxAddonInstance;
 
 - (void) codea:(CodeaViewController*)controller didCreateLuaState:(struct lua_State*)L
 {
-  if (! _lua) {
-    _lua = L;
-  }
+  _lua = L;
   NSLog(@"MXStylusAddon Registering Functions");
   lua_pushboolean(L, YES);
   lua_setglobal(L, "STYLUS_ADDON");
@@ -49,6 +47,7 @@ static MXStylusAddon *mxAddonInstance;
 - (void) codea:(CodeaViewController*)controller willCloseLuaState:(struct lua_State*)L
 {
   NSLog(@"MXStylusAddon resetting Lua");
+  _lua = nil;
   self.luaReceiveEnabled = NO;
 }
 

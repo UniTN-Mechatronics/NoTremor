@@ -13,6 +13,7 @@ colors = {
 colors = {
     color(255, 0, 38, 255),
 }
+
 function PBVertLine:init(master)
     -- you can accept and set parameters here
     self.master = master

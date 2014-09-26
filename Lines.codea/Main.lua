@@ -13,9 +13,9 @@ function setup()
     buttonStart.pos.y = 40
     hideNavbar = false
 
-    size = readLocalData("size", 20)
-    steps = readLocalData("steps", 2) 
-    nLines = readLocalData("nLines", 2)
+    size = readLocalData("size", 60)
+    steps = readLocalData("steps", 10)
+    disturbingLines = readLocalData("disturbingLines", 3)
     animateBackground = readLocalData("animateBackground", false)
     recordVideo = readLocalData("recordVideo", false)
     subject = readLocalData("subject", "Unknown")
@@ -25,7 +25,7 @@ function setup()
 
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
-    parameter.integer("nLines", 0, 10, nLines, disturbingLines)
+    parameter.integer("disturbingLines", 0, 10, disturbingLines, function() saveLocalData("disturbingLines", disturbingLines) end)
     parameter.integer("steps", 1, 50, steps, function() saveLocalData("steps", steps) end)
     parameter.number("avgDelay", 0, 5, path.avgDelay, function() avgDelay = round(avgDelay, 1); path.avgDelay = avgDelay; saveLocalData("avgDelay", avgDelay) end)
     parameter.number("minDelay", 0, 5, path.minDelay, function() minDelay = round(minDelay, 1); path.minDelay = minDelay; saveLocalData("minDelay", minDelay) end)
@@ -40,7 +40,7 @@ function setup()
     buttonStart.action = startStop
     touches = {}
     states = {}
-    disturbingLines()
+    createDisturbingLines()
     if STYLUS_ADDON then
         print("Lua StylusAddon available")
     else
@@ -60,18 +60,17 @@ function startStop(start)
     if start then
         path:makePath(steps)
         buttonStart.displayName = "MX:stop"
+        createDisturbingLines()
     else
         path:endAnimation()
         buttonStart.displayName = "MS:start"
-        disturbingLines() -- reenable tweens
     end
 end
 
-function disturbingLines()
-    saveLocalData("nLines", nLines)
+function createDisturbingLines()
     disturbingLinesTab = {}
     local l
-    for i = 1, nLines do
+    for i = 1, disturbingLines do
         l = PBVertLine(path)
         table.insert(disturbingLinesTab, l)
     end
@@ -82,23 +81,6 @@ function drawCamera(active)
     if camera and active then
         cameraSource(CAMERA_FRONT)
         sprite(CAMERA, WIDTH/2, HEIGHT/2+cameraPos, WIDTH)
-        pushStyle()
-        fill(0)
-        font("Courier")
-        textMode(CORNER)
-        text(string.format("%s @ %s", subject, os.date()), 10, HEIGHT-20)
-
-        textAlign(RIGHT)
-        font("Courier-Bold")
-        fontSize(18)
-        fill(0, 0, 0, 255)
-        if isStylusConnected() then
-            text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #path.path), WIDTH-110, HEIGHT-20)
-            else
-            text(string.format("n: %d", #path.path), WIDTH-50, HEIGHT-20)
-        end
-
-        popStyle()
     end
 end
 
@@ -123,6 +105,23 @@ function draw()
     
     path:draw()
     drawCamera(camOnTop)
+
+    pushStyle()
+    fill(0)
+    font("Courier")
+    textMode(CORNER)
+    text(string.format("%s @ %s", subject, os.date()), 10, HEIGHT-20)
+    textAlign(RIGHT)
+    font("Courier-Bold")
+    fontSize(18)
+    fill(0, 0, 0, 255)
+    if isStylusConnected() then
+        text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #path.path), WIDTH-120, HEIGHT-20)
+    else
+        text(string.format("n: %d", #path.path), WIDTH-60, HEIGHT-20)
+    end
+    popStyle()
+
     buttonStart:draw()
 end
 
