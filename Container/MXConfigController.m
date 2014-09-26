@@ -207,12 +207,15 @@ typedef enum
 
 #pragma mark IBActions
 - (IBAction)shareFile:(id)sender {
-  NSURL *fileURL = [self fileURLForIndexPath:[_tableView indexPathForSelectedRow]];
-  [_docController setURL:fileURL];
+  NSURL *fileURL;
   if (sender == _shareButton) {
+    fileURL = [self fileURLForIndexPath:[_tableView indexPathForSelectedRow]];
+    [_docController setURL:fileURL];
     [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
   }
   else if ([sender isKindOfClass:[NSIndexPath class]]) {
+    fileURL = [self fileURLForIndexPath:sender];
+    [_docController setURL:fileURL];
     UITableViewCell * cell = [_tableView cellForRowAtIndexPath:sender];
     CGRect frame = cell.frame;
     UIView *view = _tableView.viewForBaselineLayout;
