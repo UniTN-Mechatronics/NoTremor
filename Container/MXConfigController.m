@@ -34,7 +34,8 @@ typedef enum
   [self.docController setDelegate:self];
   self.documentsDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
   NSFileManager *manager = [NSFileManager defaultManager];
-  NSArray *allItems = [manager contentsOfDirectoryAtPath:self.documentsDir error:nil];
+  NSArray *allItems = [manager contentsOfDirectoryAtPath:self.documentsDir
+                                                   error:nil];
   NSPredicate * fltr = [NSPredicate predicateWithFormat:@"self ENDSWITH '.txt'"];
   if (!self.logFiles) {
     self.logFiles = [[NSMutableArray alloc] initWithArray:[allItems filteredArrayUsingPredicate:fltr]];
@@ -45,6 +46,7 @@ typedef enum
   }
   [self.tableView reloadData];
   self.tableView.allowsMultipleSelectionDuringEditing = YES;
+  self.shareButton.enabled = NO;
 }
 
 
@@ -97,7 +99,8 @@ typedef enum
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [[UITableViewCell alloc] init];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"documentsCell"
+                                                          forIndexPath:indexPath];
   [[cell textLabel] setText:[self fileNameForIndexPath:indexPath]];
   return cell;
 }
@@ -153,11 +156,13 @@ typedef enum
     self.textView.text = @"Currently unsuported";
   }
   [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:NO];
+  self.shareButton.enabled = YES;
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:NO];
+  self.shareButton.enabled = NO;
 }
 
 // Override to support editing the table view.
@@ -181,16 +186,13 @@ typedef enum
                                                                             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                                                                             [self.movieFiles removeObjectAtIndex:indexPath.row];
                                                                           }
-                                                                          [tableView reloadData];
+                                                                          [self.tableView reloadData];
                                                                         }];
   
   UITableViewRowAction *shareAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
                                                                          title:@"Share"
                                                                        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-                                                                         NSURL *fileURL = [self fileURLForIndexPath:indexPath];
-                                                                         [self.docController setURL:fileURL];
-                                                                         [self.docController setDelegate:self];
-                                                                         [self.docController presentOpenInMenuFromBarButtonItem:self.shareButton animated:YES];
+                                                                         [self shareFile:indexPath];
                                                                        }];
   return @[deleteAction, shareAction];
 }
@@ -207,6 +209,14 @@ typedef enum
 - (IBAction)shareFile:(id)sender {
   NSURL *fileURL = [self fileURLForIndexPath:[_tableView indexPathForSelectedRow]];
   [_docController setURL:fileURL];
-  [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
+  if (sender == _shareButton) {
+    [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
+  }
+  else if ([sender isKindOfClass:[NSIndexPath class]]) {
+    UITableViewCell * cell = [_tableView cellForRowAtIndexPath:sender];
+    CGRect frame = cell.frame;
+    UIView *view = _tableView.viewForBaselineLayout;
+    [_docController presentOpenInMenuFromRect:frame inView:view animated:YES];
+  }
 }
 @end
