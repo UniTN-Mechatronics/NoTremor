@@ -45,7 +45,8 @@
     docsList = [NSMutableArray array];
     [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
       [docsList addObject:[[MXDocument alloc] initWithFileName:obj]];
-      [[docsList lastObject]  setFolderPath:_folderPath];
+      [[docsList lastObject] setFolderPath:_folderPath];
+      [[docsList lastObject] setFileExt:k];
     }];
     self.list[k] = docsList;
   }

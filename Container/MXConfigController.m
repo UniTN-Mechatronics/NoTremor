@@ -89,13 +89,13 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   MXDocument *doc = [_documents documentAtIndexPath:indexPath];
-  if (indexPath.section == sectionLogs) {
+  if ([doc.fileExt isEqual:@".txt"]) {
     self.textView.text = [NSString stringWithContentsOfFile:doc.filePath
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
   }
 
-  else if (indexPath.section == sectionMovies) {
+  else if ([doc.fileExt isEqual:@".mp4"]) {
     MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:doc.fileURL];
     moviePlayerViewController.view.frame = self.view.bounds;
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
