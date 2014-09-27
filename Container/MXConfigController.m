@@ -30,20 +30,9 @@ typedef enum
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   _sectionTitles = @[@"Log files", @"Videos"];
+  self.documents = [MXDocumentsList documentsListAtPath:NULL forTypes:@{@".txt" : @"Logs", @".mp4" : @"Movies"}];
   self.docController = [[UIDocumentInteractionController alloc] init];
   [self.docController setDelegate:self];
-  self.documentsDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-  NSFileManager *manager = [NSFileManager defaultManager];
-  NSArray *allItems = [manager contentsOfDirectoryAtPath:self.documentsDir
-                                                   error:nil];
-  NSPredicate * fltr = [NSPredicate predicateWithFormat:@"self ENDSWITH '.txt'"];
-  if (!self.logFiles) {
-    self.logFiles = [[NSMutableArray alloc] initWithArray:[allItems filteredArrayUsingPredicate:fltr]];
-  }
-  fltr = [NSPredicate predicateWithFormat:@"self ENDSWITH '.mp4'"];
-  if (!self.movieFiles) {
-    self.movieFiles = [[NSMutableArray alloc] initWithArray:[allItems filteredArrayUsingPredicate:fltr]];
-  }
   [self.tableView reloadData];
   self.tableView.allowsMultipleSelectionDuringEditing = YES;
   self.shareButton.enabled = NO;
@@ -72,28 +61,17 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return _sectionTitles.count;
+  return _documents.types.count; //_sectionTitles.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  return self.sectionTitles[section];
+  return _documents.types[[_documents sectionAtIndex:section]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  NSInteger r = 0;
-  switch (section) {
-    case sectionLogs:
-      r = _logFiles.count;
-      break;
-    case sectionMovies:
-      r = _movieFiles.count;
-      break;
-    default:
-      break;
-  }
-  return r;
+  return [_documents.list[[_documents sectionAtIndex:section]] count];
 }
 
 
@@ -101,49 +79,24 @@ typedef enum
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"documentsCell"
                                                           forIndexPath:indexPath];
-  [[cell textLabel] setText:[self fileNameForIndexPath:indexPath]];
+  [[cell textLabel] setText:[_documents documentAtIndexPath:indexPath].fileName];
   return cell;
 }
 
-- (NSString *)fileNameForIndexPath:(NSIndexPath *)indexPath
-{
-  switch (indexPath.section) {
-    case sectionLogs:
-      return _logFiles[indexPath.row];
-      break;
-    case sectionMovies:
-      return _movieFiles[indexPath.row];
-      break;
-    default:
-      break;
-  }
-  return @"Undefined";
-}
-
-- (NSString *)filePathForIndexPath:(NSIndexPath *)indexPath
-{
-  return [self.documentsDir stringByAppendingPathComponent:[self fileNameForIndexPath:indexPath]];
-}
-
-- (NSURL *)fileURLForIndexPath:(NSIndexPath *)indexPath
-{
-  return [NSURL fileURLWithPath:[self filePathForIndexPath:indexPath]];
-}
 
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *filePath = [self filePathForIndexPath:indexPath];
+  MXDocument *doc = [_documents documentAtIndexPath:indexPath];
   if (indexPath.section == sectionLogs) {
-    self.textView.text = [NSString stringWithContentsOfFile:filePath
+    self.textView.text = [NSString stringWithContentsOfFile:doc.filePath
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
   }
 
   else if (indexPath.section == sectionMovies) {
-    NSURL    *fileURL  = [NSURL fileURLWithPath:filePath];
-    MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:doc.fileURL];
     moviePlayerViewController.view.frame = self.view.bounds;
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
     moviePlayerViewController.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
@@ -177,15 +130,7 @@ typedef enum
   UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
                                                                           title:@"Delete"
                                                                         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-                                                                          NSString *filePath = [self filePathForIndexPath:indexPath];
-                                                                          if (indexPath.section == sectionLogs) {
-                                                                            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                                                                            [self.logFiles removeObjectAtIndex:indexPath.row];
-                                                                          }
-                                                                          else if (indexPath.section == sectionMovies) {
-                                                                            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                                                                            [self.movieFiles removeObjectAtIndex:indexPath.row];
-                                                                          }
+                                                                          [self.documents removeDocumentAtIndexPath:indexPath];
                                                                           [self.tableView reloadData];
                                                                         }];
   
@@ -207,15 +152,14 @@ typedef enum
 
 #pragma mark IBActions
 - (IBAction)shareFile:(id)sender {
-  NSURL *fileURL;
   if (sender == _shareButton) {
-    fileURL = [self fileURLForIndexPath:[_tableView indexPathForSelectedRow]];
-    [_docController setURL:fileURL];
+    MXDocument *doc = [_documents documentAtIndexPath:[_tableView indexPathForSelectedRow]];
+    [_docController setURL:doc.fileURL];
     [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
   }
   else if ([sender isKindOfClass:[NSIndexPath class]]) {
-    fileURL = [self fileURLForIndexPath:sender];
-    [_docController setURL:fileURL];
+    MXDocument *doc = [_documents documentAtIndexPath:sender];
+    [_docController setURL:doc.fileURL];
     UITableViewCell * cell = [_tableView cellForRowAtIndexPath:sender];
     CGRect frame = cell.frame;
     UIView *view = _tableView.viewForBaselineLayout;

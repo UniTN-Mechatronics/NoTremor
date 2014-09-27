@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Addons/MXStylusAddon.h"
+#import "MXDocumentsList.h"
 
 @interface MXConfigController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -16,5 +17,5 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) NSMutableArray *logFiles;
 @property (strong, nonatomic) NSMutableArray *movieFiles;
-
+@property (strong, nonatomic) MXDocumentsList *documents;
 @end

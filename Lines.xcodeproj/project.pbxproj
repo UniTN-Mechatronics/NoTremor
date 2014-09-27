@@ -59,6 +59,8 @@
 		8827484F19D329B6000B4CB1 /* Squares.codea in Resources */ = {isa = PBXBuildFile; fileRef = 8827484E19D329B6000B4CB1 /* Squares.codea */; };
 		88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXStylusAddon.m */; };
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
+		8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
+		8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
 		DB0DC0AE18C459EC005F4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DC0AD18C459EC005F4723 /* Images.xcassets */; };
 		DB0DC0B618C46085005F4723 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B518C46085005F4723 /* CoreImage.framework */; };
 		DB0DC0B818C4608A005F4723 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B718C4608A005F4723 /* CoreLocation.framework */; };
@@ -113,6 +115,10 @@
 		88342D9F19CB3D5F0068F865 /* MXStylusAddon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXStylusAddon.h; sourceTree = "<group>"; };
 		88342DA019CB3D5F0068F865 /* MXStylusAddon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXStylusAddon.m; sourceTree = "<group>"; };
 		88342DA219CB3EEB0068F865 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8835AB8719D5DFD000A0481A /* MXDocumentsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXDocumentsList.h; sourceTree = "<group>"; };
+		8835AB8819D5DFD000A0481A /* MXDocumentsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocumentsList.m; sourceTree = "<group>"; };
+		8835AB8A19D5E00A00A0481A /* MXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXDocument.h; sourceTree = "<group>"; };
+		8835AB8B19D5E00A00A0481A /* MXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocument.m; sourceTree = "<group>"; };
 		DB0DC0AD18C459EC005F4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB0DC0B518C46085005F4723 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		DB0DC0B718C4608A005F4723 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -315,6 +321,10 @@
 				DB8A009F16F2E859005F87A6 /* Resources */,
 				DB0DC0AD18C459EC005F4723 /* Images.xcassets */,
 				DB8A004D16F2DBDA005F87A6 /* Supporting Files */,
+				8835AB8719D5DFD000A0481A /* MXDocumentsList.h */,
+				8835AB8819D5DFD000A0481A /* MXDocumentsList.m */,
+				8835AB8A19D5E00A00A0481A /* MXDocument.h */,
+				8835AB8B19D5E00A00A0481A /* MXDocument.m */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -530,6 +540,8 @@
 				88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */,
 				881CFFE419CC24EF00A39D83 /* MXCodeaViewController.m in Sources */,
 				DB8A005716F2DBDA005F87A6 /* AppDelegate.mm in Sources */,
+				8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */,
+				8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
