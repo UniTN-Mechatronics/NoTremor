@@ -61,6 +61,8 @@
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
 		8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
 		8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
+		88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
+		88F4281719D74BC5006C6DE5 /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
 		DB0DC0AE18C459EC005F4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DC0AD18C459EC005F4723 /* Images.xcassets */; };
 		DB0DC0B618C46085005F4723 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B518C46085005F4723 /* CoreImage.framework */; };
 		DB0DC0B818C4608A005F4723 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B718C4608A005F4723 /* CoreLocation.framework */; };
@@ -528,6 +530,8 @@
 				8827481C19D32872000B4CB1 /* MXStylusAddon.m in Sources */,
 				8827481D19D32872000B4CB1 /* MXCodeaViewController.m in Sources */,
 				8827481E19D32872000B4CB1 /* AppDelegate.mm in Sources */,
+				88F4281719D74BC5006C6DE5 /* MXDocument.m in Sources */,
+				88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
