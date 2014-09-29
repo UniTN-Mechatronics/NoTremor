@@ -19,6 +19,7 @@
 
 + (NSString *)humanName;
 + (NSArray *)extensions;
++ (NSString *)UTI;
 + (NSMutableArray *)filterFileNames:(NSArray *)list atPath:(NSString *)path;
 
 - (instancetype)initWithFileName:(NSString *)name;
@@ -26,6 +27,6 @@
 - (NSURL *)fileURL;
 - (BOOL) delete;
 - (BOOL) renameTo:(NSString *)newName;
-- (UIView *)renderInView;
-
+- (void)renderInView:(UIView *)view;
+- (NSString *)fileDescription;
 @end

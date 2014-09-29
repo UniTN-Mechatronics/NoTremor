@@ -9,5 +9,4 @@
 #import "MXDocument.h"
 
 @interface MXLogDocument : MXDocument
-
 @end

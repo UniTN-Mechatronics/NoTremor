@@ -73,8 +73,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" editable="NO" text="Select a log file to view it" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-f1-fCz">
-                                <rect key="frame" x="308" y="64" width="712" height="704"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" editable="NO" text="None" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-f1-fCz">
+                                <rect key="frame" x="308" y="100" width="712" height="667.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -108,16 +108,25 @@
                                     <outlet property="delegate" destination="yp3-sU-Xuj" id="ZGo-19-LKE"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRN-Vn-wUi">
+                                <rect key="frame" x="308" y="72" width="708" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="4Qi-f1-fCz" secondAttribute="trailing" constant="-16" id="0if-uZ-0Ra"/>
                             <constraint firstItem="Zan-Vj-COQ" firstAttribute="top" secondItem="m7R-Je-OlT" secondAttribute="bottom" id="Fmi-ad-EBu"/>
+                            <constraint firstItem="4Qi-f1-fCz" firstAttribute="top" secondItem="DRN-Vn-wUi" secondAttribute="bottom" constant="8" id="L1P-CC-dhf"/>
+                            <constraint firstItem="DRN-Vn-wUi" firstAttribute="top" secondItem="0x1-Et-Ms2" secondAttribute="bottom" constant="8" id="OAy-GV-Z4b"/>
                             <constraint firstItem="Zan-Vj-COQ" firstAttribute="top" secondItem="4Qi-f1-fCz" secondAttribute="bottom" id="PBt-yD-hK3"/>
                             <constraint firstItem="m7R-Je-OlT" firstAttribute="top" secondItem="0x1-Et-Ms2" secondAttribute="bottom" id="QEw-AS-wd4"/>
                             <constraint firstItem="4Qi-f1-fCz" firstAttribute="leading" secondItem="m7R-Je-OlT" secondAttribute="trailing" constant="8" id="T5T-YC-5v1"/>
                             <constraint firstItem="m7R-Je-OlT" firstAttribute="leading" secondItem="gZh-EF-fSf" secondAttribute="leadingMargin" constant="-20" id="YFV-6T-f6k"/>
-                            <constraint firstItem="4Qi-f1-fCz" firstAttribute="top" secondItem="0x1-Et-Ms2" secondAttribute="bottom" id="Zmv-s1-Por"/>
+                            <constraint firstItem="DRN-Vn-wUi" firstAttribute="leading" secondItem="m7R-Je-OlT" secondAttribute="trailing" constant="8" id="dzU-kX-YU2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DRN-Vn-wUi" secondAttribute="trailing" constant="-12" id="gjj-qn-jy7"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -132,6 +141,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="fileDescription" destination="DRN-Vn-wUi" id="svS-qz-Kz5"/>
                         <outlet property="shareButton" destination="Uz4-PK-iHM" id="Fes-0M-0nS"/>
                         <outlet property="tableView" destination="m7R-Je-OlT" id="hAd-pU-ROl"/>
                         <outlet property="textView" destination="4Qi-f1-fCz" id="kQw-be-8p4"/>

@@ -18,4 +18,6 @@
 @property (strong, nonatomic) NSMutableArray *logFiles;
 @property (strong, nonatomic) NSMutableArray *movieFiles;
 @property (strong, nonatomic) MXDocumentsList *documents;
+@property (weak, nonatomic) IBOutlet UIView *customView;
+@property (weak, nonatomic) IBOutlet UILabel *fileDescription;
 @end

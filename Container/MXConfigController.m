@@ -36,6 +36,8 @@ typedef enum
   [self.tableView reloadData];
   self.tableView.allowsMultipleSelectionDuringEditing = YES;
   self.shareButton.enabled = NO;
+  self.fileDescription.text = @"No file selected.";
+  self.textView.text = @"";
 }
 
 
@@ -93,6 +95,8 @@ typedef enum
     self.textView.text = [NSString stringWithContentsOfFile:doc.filePath
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
+    self.fileDescription.text = doc.fileDescription;
+//    [(MXLogDocument *)doc renderInView:self.customView];
   }
 
   else if ([doc isKindOfClass:MXMovieDocument.class]) {
@@ -154,14 +158,13 @@ typedef enum
 - (IBAction)shareFile:(id)sender {
   if (sender == _shareButton) {
     MXDocument *doc = [_documents documentAtIndexPath:[_tableView indexPathForSelectedRow]];
-    NSLog(@"URL: %@", doc.fileURL);
     [_docController setURL:doc.fileURL];
+    [_docController setUTI:[doc.class UTI]];
     [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
   }
   else if ([sender isKindOfClass:[NSIndexPath class]]) {
     MXDocument *doc = [_documents documentAtIndexPath:sender];
     [_docController setURL:doc.fileURL];
-    NSLog(@"URL: %@", doc.fileURL);
     UITableViewCell * cell = [_tableView cellForRowAtIndexPath:sender];
     CGRect frame = cell.frame;
     UIView *view = _tableView.viewForBaselineLayout;

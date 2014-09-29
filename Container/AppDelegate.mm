@@ -38,13 +38,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  [_stylusAddon searchStylus:self];
+  //[_stylusAddon searchStylus:self];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-  if (_stylusAddon.stylus)
-    [[WacomManager getManager] selectDevice:_stylusAddon.stylus];
+//  if (_stylusAddon.stylus)
+//    [[WacomManager getManager] selectDevice:_stylusAddon.stylus];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -20,6 +20,11 @@
   return @[@""];
 }
 
++ (NSString *)UTI
+{
+  return @"public.plain-text";
+}
+
 + (NSMutableArray *)filterFileNames:(NSArray *)list atPath:(NSString *)path
 {
   NSPredicate    *filter;
@@ -83,10 +88,15 @@
 }
 
 
-- (UIView *)renderInView
+- (void)renderInView:(UIView *)view
 {
-  return [[UIView alloc] init];
+  [view addSubview:[[UIView alloc] init]];
 }
 
+- (NSString *)fileDescription
+{
+  NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.filePath error:nil];
+  return [NSString stringWithFormat:@"%@ (%lu kb)", self.fileName, [attr[NSFileSize] integerValue]  / 1024];
+}
 
 @end

@@ -20,17 +20,16 @@
   return @[@".mp4"];
 }
 
-+ (NSPredicate *)predicate
++ (NSString *)UTI
 {
-  return [NSPredicate predicateWithFormat:@"self ENDSWITH %@", self.extensions[0]];
+  return @"public.movie";
 }
-
-
 
 - (instancetype)init
 {
   self = [super init];
   if (self) {
+    
   }
   return self;
 }
