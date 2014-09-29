@@ -56,7 +56,7 @@ function PBPath:draw()
     translate(self.t.x, self.t.y)
 
     pushMatrix()
-    if isStylusConnected() then
+    if isStylusConnected() and animatePressure then
       scale(1 + 5 * normalizedStylusPressure())
     end
     stroke(0)

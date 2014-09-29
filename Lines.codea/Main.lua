@@ -22,6 +22,7 @@ function setup()
     camera = readLocalData("camera", false)
     cameraPos = readLocalData("cameraPos", 0)
     camOnTop = readLocalData("camOnTop", true)
+    animatePressure = readLocalData("animatePressure", false)
 
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
@@ -36,6 +37,7 @@ function setup()
     parameter.integer("cameraPos", 0, HEIGHT, cameraPos, function() saveLocalData("cameraPos",  cameraPos) end)
     parameter.boolean("camOnTop", camOnTop, function() saveLocalData("camOnTop", camOnTop) end)
     parameter.boolean("hideNavbar", false)
+    parameter.boolean("animatePressure", animatePressure, function() saveLocalData("animatePressure", animatePressure) end)
 
     buttonStart.action = startStop
     touches = {}
