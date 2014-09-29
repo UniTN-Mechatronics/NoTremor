@@ -11,6 +11,10 @@
 		881CFFE619CC55DD00A39D83 /* WacomDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE519CC55DD00A39D83 /* WacomDevice.framework */; };
 		881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */; };
 		881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
+		8822746819D9436100CBB9DB /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
+		8822746919D9436100CBB9DB /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
+		8822746C19D946A700CBB9DB /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
+		8822746D19D946A700CBB9DB /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
 		8827481619D30889000B4CB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8827481519D30889000B4CB1 /* MediaPlayer.framework */; };
 		8827481A19D32872000B4CB1 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
 		8827481B19D32872000B4CB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8A005216F2DBDA005F87A6 /* main.m */; };
@@ -110,6 +114,10 @@
 		881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		881CFFE919CC5E1100A39D83 /* MXConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXConfigController.h; sourceTree = "<group>"; };
 		881CFFEA19CC5E1100A39D83 /* MXConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXConfigController.m; sourceTree = "<group>"; };
+		8822746619D9436100CBB9DB /* MXLogDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXLogDocument.h; sourceTree = "<group>"; };
+		8822746719D9436100CBB9DB /* MXLogDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXLogDocument.m; sourceTree = "<group>"; };
+		8822746A19D946A700CBB9DB /* MXMovieDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXMovieDocument.h; sourceTree = "<group>"; };
+		8822746B19D946A700CBB9DB /* MXMovieDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXMovieDocument.m; sourceTree = "<group>"; };
 		8827481519D30889000B4CB1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8827484C19D32872000B4CB1 /* Squares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8827484D19D32872000B4CB1 /* Squares-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Squares-Info.plist"; path = "/Users/p4010/Develop/iOS/Lines/Container/Squares-Info.plist"; sourceTree = "<absolute>"; };
@@ -249,6 +257,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8822746519D80E0600CBB9DB /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				8835AB8A19D5E00A00A0481A /* MXDocument.h */,
+				8835AB8B19D5E00A00A0481A /* MXDocument.m */,
+				8822746619D9436100CBB9DB /* MXLogDocument.h */,
+				8822746719D9436100CBB9DB /* MXLogDocument.m */,
+				8822746A19D946A700CBB9DB /* MXMovieDocument.h */,
+				8822746B19D946A700CBB9DB /* MXMovieDocument.m */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
 		DB8A003A16F2DBDA005F87A6 = {
 			isa = PBXGroup;
 			children = (
@@ -325,8 +346,7 @@
 				DB8A004D16F2DBDA005F87A6 /* Supporting Files */,
 				8835AB8719D5DFD000A0481A /* MXDocumentsList.h */,
 				8835AB8819D5DFD000A0481A /* MXDocumentsList.m */,
-				8835AB8A19D5E00A00A0481A /* MXDocument.h */,
-				8835AB8B19D5E00A00A0481A /* MXDocument.m */,
+				8822746519D80E0600CBB9DB /* Documents */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -423,8 +443,9 @@
 		DB8A003B16F2DBDA005F87A6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MX;
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = MyCompany;
+				ORGANIZATIONNAME = "University of Trento";
 				TargetAttributes = {
 					8827481719D32872000B4CB1 = {
 						DevelopmentTeam = 5FJDWFUQCL;
@@ -525,10 +546,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8822746919D9436100CBB9DB /* MXLogDocument.m in Sources */,
 				8827481A19D32872000B4CB1 /* MXConfigController.m in Sources */,
 				8827481B19D32872000B4CB1 /* main.m in Sources */,
 				8827481C19D32872000B4CB1 /* MXStylusAddon.m in Sources */,
 				8827481D19D32872000B4CB1 /* MXCodeaViewController.m in Sources */,
+				8822746D19D946A700CBB9DB /* MXMovieDocument.m in Sources */,
 				8827481E19D32872000B4CB1 /* AppDelegate.mm in Sources */,
 				88F4281719D74BC5006C6DE5 /* MXDocument.m in Sources */,
 				88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */,
@@ -539,10 +562,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8822746819D9436100CBB9DB /* MXLogDocument.m in Sources */,
 				881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */,
 				DB8A005316F2DBDA005F87A6 /* main.m in Sources */,
 				88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */,
 				881CFFE419CC24EF00A39D83 /* MXCodeaViewController.m in Sources */,
+				8822746C19D946A700CBB9DB /* MXMovieDocument.m in Sources */,
 				DB8A005716F2DBDA005F87A6 /* AppDelegate.mm in Sources */,
 				8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */,
 				8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */,

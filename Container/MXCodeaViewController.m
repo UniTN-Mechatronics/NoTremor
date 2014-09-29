@@ -3,7 +3,7 @@
 //  Lines
 //
 //  Created by Paolo Bosetti on 19/09/14.
-//  Copyright (c) 2014 MyCompany. All rights reserved.
+//  Copyright (c) 2014 University of Trento. All rights reserved.
 //
 
 #import "MXCodeaViewController.h"

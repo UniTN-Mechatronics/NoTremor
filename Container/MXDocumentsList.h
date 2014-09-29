@@ -3,20 +3,21 @@
 //  Lines
 //
 //  Created by Paolo Bosetti on 26/09/14.
-//  Copyright (c) 2014 MyCompany. All rights reserved.
+//  Copyright (c) 2014 University of Trento. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MXDocument.h"
+#import "MXLogDocument.h"
+#import "MXMovieDocument.h"
 
 @interface MXDocumentsList : NSObject
 @property NSMutableDictionary *list;
-@property NSMutableDictionary *types;
-@property NSString *folderPath;
+@property NSMutableArray      *types;
+@property NSString            *folderPath;
 
-+ (MXDocumentsList *)documentsListAtPath:(NSString *)path forTypes:(NSDictionary *)types;
++ (MXDocumentsList *)documentsListAtPath:(NSString *)path forTypes:(NSArray *)types;
 
-- (void)scanFolder:(NSString *)path forExtensions:(NSArray *)extList;
+- (void)scanFolder:(NSString *)path forTypes:(NSArray *)types;
 - (MXDocument *)documentAtIndexPath:(NSIndexPath *)indexPath;
 - (void)removeDocumentAtIndexPath:(NSIndexPath *)indexPath;
 - (NSString *)sectionAtIndex:(NSInteger)index;

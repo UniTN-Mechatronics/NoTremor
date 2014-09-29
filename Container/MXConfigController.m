@@ -3,7 +3,7 @@
 //  Lines
 //
 //  Created by Paolo Bosetti on 19/09/14.
-//  Copyright (c) 2014 MyCompany. All rights reserved.
+//  Copyright (c) 2014 University of Trento. All rights reserved.
 //
 
 #import <MediaPlayer/MediaPlayer.h>
@@ -30,7 +30,7 @@ typedef enum
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   _sectionTitles = @[@"Log files", @"Videos"];
-  self.documents = [MXDocumentsList documentsListAtPath:NULL forTypes:@{@".txt" : @"Logs", @".mp4" : @"Movies"}];
+  self.documents = [MXDocumentsList documentsListAtPath:nil forTypes:@[MXLogDocument.class, MXMovieDocument.class]];
   self.docController = [[UIDocumentInteractionController alloc] init];
   [self.docController setDelegate:self];
   [self.tableView reloadData];
@@ -66,7 +66,7 @@ typedef enum
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  return _documents.types[[_documents sectionAtIndex:section]];
+  return [_documents.types[section] humanName];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -89,13 +89,13 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   MXDocument *doc = [_documents documentAtIndexPath:indexPath];
-  if ([doc.fileExt isEqual:@".txt"]) {
+  if ([doc isKindOfClass:MXLogDocument.class]) {
     self.textView.text = [NSString stringWithContentsOfFile:doc.filePath
                                                   encoding:NSUTF8StringEncoding
                                                      error:NULL];
   }
 
-  else if ([doc.fileExt isEqual:@".mp4"]) {
+  else if ([doc isKindOfClass:MXMovieDocument.class]) {
     MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:doc.fileURL];
     moviePlayerViewController.view.frame = self.view.bounds;
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
@@ -154,12 +154,14 @@ typedef enum
 - (IBAction)shareFile:(id)sender {
   if (sender == _shareButton) {
     MXDocument *doc = [_documents documentAtIndexPath:[_tableView indexPathForSelectedRow]];
+    NSLog(@"URL: %@", doc.fileURL);
     [_docController setURL:doc.fileURL];
     [_docController presentOpenInMenuFromBarButtonItem:_shareButton animated:YES];
   }
   else if ([sender isKindOfClass:[NSIndexPath class]]) {
     MXDocument *doc = [_documents documentAtIndexPath:sender];
     [_docController setURL:doc.fileURL];
+    NSLog(@"URL: %@", doc.fileURL);
     UITableViewCell * cell = [_tableView cellForRowAtIndexPath:sender];
     CGRect frame = cell.frame;
     UIView *view = _tableView.viewForBaselineLayout;

@@ -3,18 +3,50 @@
 //  Lines
 //
 //  Created by Paolo Bosetti on 26/09/14.
-//  Copyright (c) 2014 MyCompany. All rights reserved.
+//  Copyright (c) 2014 University of Trento. All rights reserved.
 //
 
 #import "MXDocument.h"
 
 @implementation MXDocument
 
++ (NSString *)humanName
+{
+  return @"Generic file";
+}
+
++ (NSArray *)extensions
+{
+  return @[@""];
+}
+
++ (NSMutableArray *)filterFileNames:(NSArray *)list atPath:(NSString *)path
+{
+  NSPredicate    *filter;
+  NSMutableArray *shortList = [NSMutableArray arrayWithCapacity:list.count];
+  NSMutableArray *result = [NSMutableArray arrayWithCapacity:list.count];
+  
+  for (NSString *ext in [self extensions]) {
+    filter = [NSPredicate predicateWithFormat:@"self ENDSWITH %@", ext];
+    [shortList removeAllObjects];
+    [shortList addObjectsFromArray:[list filteredArrayUsingPredicate:filter]];
+    for (NSString *fileName in shortList) {
+      [result addObject:[[self alloc] initWithFileName:fileName]];
+      [[result lastObject] setFileExt:ext];
+      [[result lastObject] setFolderPath:path];
+    }
+  }
+  
+  return result;
+}
+
+
 - (id)init
 {
   self = [super init];
   if (self) {
     self.folderPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    _humanName = [self.class humanName];
   }
   return self;
 }
@@ -55,5 +87,6 @@
 {
   return [[UIView alloc] init];
 }
+
 
 @end
