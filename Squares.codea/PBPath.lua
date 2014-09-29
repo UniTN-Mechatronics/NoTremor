@@ -31,9 +31,9 @@ function PBPath:header(n)
     local desc = "# Lines test number "..(readLocalData("runid", 0) + 1)
     desc = desc.."\n# date: "..os.date()
     desc = desc.."\n# steps: "..self.steps
-    desc = desc.."\n# min delay (0.1 s): "..self.minDelay
-    desc = desc.."\n# max delay: (0.1 s)"..self.avgDelay
-    desc = desc.."\n# disturbing lines: "..nLines
+    desc = desc.."\n# min delay (s): "..self.minDelay
+    desc = desc.."\n# max delay: (s)"..self.avgDelay
+    desc = desc.."\n# disturbing lines: "..disturbingLines
     desc = desc.."\n# subject name: "..subject.."\n"
     for i, v in ipairs(self.path) do
         desc = desc..string.format("# p=%f t=%f\n", v.x, v.dt)
@@ -46,41 +46,17 @@ function PBPath:draw()
     -- Codea does not automatically call this method
     local red = color(243, 12, 40, 255)
     local green = color(65, 189, 45, 255)
-    pushStyle()
-    textAlign(RIGHT)
-    font("ArialMT")
-    fontSize(18)
-    fill(255)
-    if isStylusConnected() then
-      text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #self.path), WIDTH-100, HEIGHT-10)
-    else
-      text(string.format("n: %d", #self.path), WIDTH-100, HEIGHT-10)
-    end
-    popStyle()
+    
     pushStyle()
     strokeWidth(5)
     pushMatrix()
     if CurrentTouch.state == ENDED then
-        -- tween(0.5, self.t, {x=WIDTH/2, y=HEIGHT/2})
         self.t = {x=WIDTH/2, y=HEIGHT/2}
     end
     translate(self.t.x, self.t.y)
 
     pushMatrix()
-    if isStylusConnected() then
-      scale(1 + 5 * normalizedStylusPressure())
-    end
-    stroke(0)
-    line(0, -self.size, 0, self.size)
-    line(-self.size, 0, self.size, 0)
     if self.animating then
-        rotate(self.rotation)
-        if self.rotation == 45 then
-            fill(red)
-        else
-            fill(green)
-        end
-        rect(-self.size/2, -self.size/2, self.size, self.size)
         popMatrix()
         popMatrix()
         strokeWidth(4)
@@ -99,8 +75,6 @@ function PBPath:draw()
         table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure()})
         end
     else
-        fill(green)
-        ellipse(0, 0, self.size)
         popMatrix()
         popMatrix()
     end
@@ -150,11 +124,13 @@ function PBPath:endAnimation()
         self.dataBuffer = {}
         saveLocalData("runid", self.runid + 1)
         print("Saved file "..self.file)
+        hideNavbar = false
     end
 end
 
 function PBPath:makePath(n)
     displayMode(FULLSCREEN)
+    hideNavbar = true
     if recordVideo then
         startRecording()
     end
@@ -202,5 +178,6 @@ function PBPath:rand()
     --return self.minDelay + math.random() * (self.avgDelay - self.minDelay)
     return (poisson(self.avgDelay*10.0, self.minDelay*10.0))/10.0
 end
+
 
 

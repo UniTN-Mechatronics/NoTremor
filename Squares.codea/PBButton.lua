@@ -3,7 +3,7 @@ PBButton = class()
 function PBButton:init(displayName)
     -- you can accept and set parameters here
     self.displayName = displayName
-    
+    self.graphic = false
     self.pos = vec2(0,0)
     self.size = vec2(0,0)
     self.action = nil
@@ -13,28 +13,36 @@ end
 function PBButton:draw()
     -- Codea does not automatically call this method
     pushStyle()
-    fill(self.color)
-    
-    font("ArialRoundedMTBold")
-    fontSize(22)
-    
-    -- use longest sound name for size
-    local w,h = textSize(self.displayName)
-    w = w + 20
-    h = h + 30
-    
-    roundRect(self.pos.x - w/2,
-              self.pos.y - h/2,
-              w,h,10)
-            
-    self.size = vec2(w,h)
-            
-    textMode(CENTER)
-    fill(54, 65, 96, 255)
-    text(self.displayName,self.pos.x+2,self.pos.y-2)
-    fill(255, 255, 255, 255)
-    text(self.displayName,self.pos.x,self.pos.y)
-    
+    if self.graphic then
+        spriteMode(CENTER)
+        local w = 150
+        local h = 50
+        sprite(self.displayName, self.pos.x, self.pos.y, w)
+        self.size = vec2(w+10,h+10)
+    else
+        fill(self.color)
+        
+        font("ArialRoundedMTBold")
+        fontSize(22)
+        
+        -- use longest sound name for size
+        local w,h = textSize(self.displayName)
+        w = w + 20
+        h = h + 30
+        
+        roundRect(self.pos.x - w/2,
+                  self.pos.y - h/2,
+                  w,h,10)
+                
+        self.size = vec2(w,h)
+                
+        textMode(CENTER)
+        fill(54, 65, 96, 255)
+        text(self.displayName,self.pos.x+2,self.pos.y-2)
+        fill(255, 255, 255, 255)
+        text(self.displayName,self.pos.x,self.pos.y)
+
+    end
     popStyle()
 end
 
@@ -57,6 +65,5 @@ function PBButton:touched(touch, args)
         if self.action then
             self.action(args)
         end
-        print("stylusPressure="..stylusPressure())
     end
 end

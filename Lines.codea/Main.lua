@@ -46,11 +46,11 @@ function setup()
     if STYLUS_ADDON then
         print("Lua StylusAddon available")
     else
-        stylusPressure = function() return 0; end
-        normalizedStylusPressure = function() return 0; end
+        stylusPressure = function() return CurrentTouch.y; end
+        normalizedStylusPressure = function() return CurrentTouch.y / HEIGHT; end
         isStylusConnected = function() return false; end
     end
-    buttonStart.graphic = true
+    buttonStart.graphic = STYLUS_ADDON
 end
 
 function round(num, idp)
@@ -65,7 +65,7 @@ function startStop(start)
         createDisturbingLines()
     else
         path:endAnimation()
-        buttonStart.displayName = "MS:start"
+        buttonStart.displayName = "MX:start"
     end
 end
 
@@ -146,5 +146,6 @@ function poisson(lambda, cut)
     until k - 1 >= cut
     return k - 1
 end
+
 
 
