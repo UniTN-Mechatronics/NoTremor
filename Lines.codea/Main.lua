@@ -38,7 +38,6 @@ function setup()
     parameter.boolean("camOnTop", camOnTop, function() saveLocalData("camOnTop", camOnTop) end)
     parameter.boolean("hideNavbar", false)
     parameter.boolean("animatePressure", animatePressure, function() saveLocalData("animatePressure", animatePressure) end)
-
     buttonStart.action = startStop
     touches = {}
     states = {}
@@ -51,6 +50,7 @@ function setup()
         isStylusConnected = function() return false; end
     end
     buttonStart.graphic = STYLUS_ADDON
+    textVPosition = 700
 end
 
 function round(num, idp)
@@ -109,19 +109,22 @@ function draw()
     drawCamera(camOnTop)
 
     pushStyle()
+
     fill(0)
-    font("Courier")
+    fontSize(18)
     textMode(CORNER)
-    text(string.format("%s @ %s", subject, os.date()), 10, HEIGHT-20)
+    textAlign(LEFT)
+    font("Courier")
+    text(string.format("%s @ %s %f", subject, os.date(), ElapsedTime), 10, textVPosition)
+
     textAlign(RIGHT)
     font("Courier-Bold")
-    fontSize(18)
-    fill(0, 0, 0, 255)
     if isStylusConnected() then
-        text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #path.path), WIDTH-120, HEIGHT-20)
+        text(string.format("p: %4d/%1.3f n: %d", stylusPressure(), normalizedStylusPressure(), #path.path), WIDTH-120, textVPosition)
     else
-        text(string.format("n: %d", #path.path), WIDTH-60, HEIGHT-20)
+        text(string.format("n: %d", #path.path), WIDTH-60, textVPosition)
     end
+
     popStyle()
 
     buttonStart:draw()

@@ -142,9 +142,15 @@ static int lua_isStylusConnected(struct lua_State *state)
 
 - (void) deviceConnected:(WacomDevice *)device
 {
-  NSLog(@"connected");
-  [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus Connected"];
-  [[[appDelegate codeaController] stylusButton] setEnabled:NO];
+  NSLog(@"connected %@", device);
+  [[WacomManager getManager] selectDevice:device];
+  self.stylus = device;
+  self.minPressure = [device getMinimumPressure];
+  self.maxPressure = [device getMaximumPressure];
+  if (device.isCurrentlyConnected) {
+    [[[appDelegate codeaController] stylusButton] setTitle:@"Stylus Connected"];
+    [[[appDelegate codeaController] stylusButton] setEnabled:NO];
+  }
 }
 
 - (void) deviceDisconnected:(WacomDevice *)device

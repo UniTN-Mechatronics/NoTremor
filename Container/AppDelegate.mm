@@ -43,7 +43,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//  if (_stylusAddon.stylus)
+  if (_stylusAddon.stylus)
+    [[WacomManager getManager] reconnectToStoredDevices];
 //    [[WacomManager getManager] selectDevice:_stylusAddon.stylus];
 }
 
