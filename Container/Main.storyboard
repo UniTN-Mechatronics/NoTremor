@@ -114,6 +114,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veS-HS-FhA" customClass="MXChart" customModule="MXContainer" customModuleProvider="target">
+                                <rect key="frame" x="308" y="559" width="708" height="201"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="xLabel" value="Time (s)"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="yLabel" value="Value"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showXAxis" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showYAxis" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="rect" keyPath="range">
+                                        <rect key="value" x="-3" y="-2" width="20" height="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

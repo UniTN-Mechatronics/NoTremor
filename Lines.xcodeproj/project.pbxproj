@@ -11,10 +11,6 @@
 		881CFFE619CC55DD00A39D83 /* WacomDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE519CC55DD00A39D83 /* WacomDevice.framework */; };
 		881CFFE819CC5B3A00A39D83 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */; };
 		881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
-		8822746819D9436100CBB9DB /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
-		8822746919D9436100CBB9DB /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
-		8822746C19D946A700CBB9DB /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
-		8822746D19D946A700CBB9DB /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
 		8827481619D30889000B4CB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8827481519D30889000B4CB1 /* MediaPlayer.framework */; };
 		8827481A19D32872000B4CB1 /* MXConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 881CFFEA19CC5E1100A39D83 /* MXConfigController.m */; };
 		8827481B19D32872000B4CB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DB8A005216F2DBDA005F87A6 /* main.m */; };
@@ -63,10 +59,15 @@
 		8827484F19D329B6000B4CB1 /* Squares.codea in Resources */ = {isa = PBXBuildFile; fileRef = 8827484E19D329B6000B4CB1 /* Squares.codea */; };
 		88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXStylusAddon.m */; };
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
-		8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
-		8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
+		88D52B3619E7EFB900784AEE /* MXChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FADE4919E44AF300DD90AD /* MXChart.swift */; };
 		88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
-		88F4281719D74BC5006C6DE5 /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
+		88FADE3D19DE92B800DD90AD /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
+		88FADE3E19DE92B800DD90AD /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
+		88FADE3F19DE92B800DD90AD /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
+		88FADE4019DE92B800DD90AD /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
+		88FADE4119DE92B800DD90AD /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
+		88FADE4219DE92B800DD90AD /* MXMovieDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746B19D946A700CBB9DB /* MXMovieDocument.m */; };
+		88FADE4319DE92BB00DD90AD /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
 		DB0DC0AE18C459EC005F4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB0DC0AD18C459EC005F4723 /* Images.xcassets */; };
 		DB0DC0B618C46085005F4723 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B518C46085005F4723 /* CoreImage.framework */; };
 		DB0DC0B818C4608A005F4723 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DC0B718C4608A005F4723 /* CoreLocation.framework */; };
@@ -129,6 +130,18 @@
 		8835AB8819D5DFD000A0481A /* MXDocumentsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocumentsList.m; sourceTree = "<group>"; };
 		8835AB8A19D5E00A00A0481A /* MXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXDocument.h; sourceTree = "<group>"; };
 		8835AB8B19D5E00A00A0481A /* MXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocument.m; sourceTree = "<group>"; };
+		88E4960919DD4EBD00C00636 /* MXContainer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MXContainer-Bridging-Header.h"; sourceTree = "<group>"; };
+		88E4961819DD6E8D00C00636 /* MXTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXTest.swift; sourceTree = "<group>"; };
+		88E4961A19DD705A00C00636 /* MXDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXDocument.swift; sourceTree = "<group>"; };
+		88E4961B19DD705A00C00636 /* MXLogDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXLogDocument.swift; sourceTree = "<group>"; };
+		88E4961C19DD705A00C00636 /* MXMovieDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXMovieDocument.swift; sourceTree = "<group>"; };
+		88E4963D19DD778500C00636 /* MXDocumentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXDocumentsList.swift; sourceTree = "<group>"; };
+		88E4963F19DE8C9000C00636 /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; };
+		88E4964819DE90C400C00636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88E4964919DE90C400C00636 /* MXDocuments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MXDocuments.h; sourceTree = "<group>"; };
+		88E4965219DE90C500C00636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88E4965319DE90C500C00636 /* MXDocumentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXDocumentsTests.swift; sourceTree = "<group>"; };
+		88FADE4919E44AF300DD90AD /* MXChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXChart.swift; sourceTree = "<group>"; };
 		DB0DC0AD18C459EC005F4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB0DC0B518C46085005F4723 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		DB0DC0B718C4608A005F4723 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -270,12 +283,70 @@
 			name = Documents;
 			sourceTree = "<group>";
 		};
+		88E4960C19DD555200C00636 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				88E4960D19DD678A00C00636 /* Documents */,
+				88E4960919DD4EBD00C00636 /* MXContainer-Bridging-Header.h */,
+				88E4961819DD6E8D00C00636 /* MXTest.swift */,
+				88E4963D19DD778500C00636 /* MXDocumentsList.swift */,
+				88FADE4919E44AF300DD90AD /* MXChart.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		88E4960D19DD678A00C00636 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				88E4961A19DD705A00C00636 /* MXDocument.swift */,
+				88E4961B19DD705A00C00636 /* MXLogDocument.swift */,
+				88E4961C19DD705A00C00636 /* MXMovieDocument.swift */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
+		88E4964619DE90C400C00636 /* MXDocuments */ = {
+			isa = PBXGroup;
+			children = (
+				88E4964919DE90C400C00636 /* MXDocuments.h */,
+				88E4964719DE90C400C00636 /* Supporting Files */,
+			);
+			path = MXDocuments;
+			sourceTree = "<group>";
+		};
+		88E4964719DE90C400C00636 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				88E4964819DE90C400C00636 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		88E4965019DE90C400C00636 /* MXDocumentsTests */ = {
+			isa = PBXGroup;
+			children = (
+				88E4965319DE90C500C00636 /* MXDocumentsTests.swift */,
+				88E4965119DE90C500C00636 /* Supporting Files */,
+			);
+			path = MXDocumentsTests;
+			sourceTree = "<group>";
+		};
+		88E4965119DE90C500C00636 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				88E4965219DE90C500C00636 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DB8A003A16F2DBDA005F87A6 = {
 			isa = PBXGroup;
 			children = (
 				8827484E19D329B6000B4CB1 /* Squares.codea */,
 				DB8A015B16F73DFF005F87A6 /* Lines.codea */,
 				DB8A004C16F2DBDA005F87A6 /* Container */,
+				88E4964619DE90C400C00636 /* MXDocuments */,
+				88E4965019DE90C400C00636 /* MXDocumentsTests */,
 				DB8A004516F2DBDA005F87A6 /* Frameworks */,
 				DB8A004416F2DBDA005F87A6 /* Products */,
 			);
@@ -347,6 +418,8 @@
 				8835AB8719D5DFD000A0481A /* MXDocumentsList.h */,
 				8835AB8819D5DFD000A0481A /* MXDocumentsList.m */,
 				8822746519D80E0600CBB9DB /* Documents */,
+				88E4960C19DD555200C00636 /* Swift */,
+				88E4963F19DE8C9000C00636 /* testing.playground */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -546,15 +619,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8822746919D9436100CBB9DB /* MXLogDocument.m in Sources */,
 				8827481A19D32872000B4CB1 /* MXConfigController.m in Sources */,
 				8827481B19D32872000B4CB1 /* main.m in Sources */,
 				8827481C19D32872000B4CB1 /* MXStylusAddon.m in Sources */,
+				88FADE4119DE92B800DD90AD /* MXLogDocument.m in Sources */,
 				8827481D19D32872000B4CB1 /* MXCodeaViewController.m in Sources */,
-				8822746D19D946A700CBB9DB /* MXMovieDocument.m in Sources */,
+				88FADE4219DE92B800DD90AD /* MXMovieDocument.m in Sources */,
 				8827481E19D32872000B4CB1 /* AppDelegate.mm in Sources */,
-				88F4281719D74BC5006C6DE5 /* MXDocument.m in Sources */,
 				88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */,
+				88FADE4019DE92B800DD90AD /* MXDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,15 +635,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8822746819D9436100CBB9DB /* MXLogDocument.m in Sources */,
 				881CFFEB19CC5E1100A39D83 /* MXConfigController.m in Sources */,
+				88FADE3F19DE92B800DD90AD /* MXMovieDocument.m in Sources */,
 				DB8A005316F2DBDA005F87A6 /* main.m in Sources */,
+				88FADE3E19DE92B800DD90AD /* MXLogDocument.m in Sources */,
+				88FADE4319DE92BB00DD90AD /* MXDocumentsList.m in Sources */,
 				88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */,
 				881CFFE419CC24EF00A39D83 /* MXCodeaViewController.m in Sources */,
-				8822746C19D946A700CBB9DB /* MXMovieDocument.m in Sources */,
 				DB8A005716F2DBDA005F87A6 /* AppDelegate.mm in Sources */,
-				8835AB8C19D5E00A00A0481A /* MXDocument.m in Sources */,
-				8835AB8919D5DFD000A0481A /* MXDocumentsList.m in Sources */,
+				88FADE3D19DE92B800DD90AD /* MXDocument.m in Sources */,
+				88D52B3619E7EFB900784AEE /* MXChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +669,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -625,6 +700,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -654,6 +730,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -678,7 +755,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
+				PRODUCT_MODULE_NAME = MXContainer;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Container/MXContainer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -689,6 +768,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -705,7 +785,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_MODULE_NAME = MXContainer;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Container/MXContainer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -716,8 +798,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -726,6 +810,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Container/Lines-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libs\"",
@@ -736,6 +821,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -746,8 +832,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libs",
@@ -756,6 +844,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "Container/Lines-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libs\"",
