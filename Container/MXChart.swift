@@ -13,21 +13,46 @@ class MXDataSeries {
   var name = String()
   var lineColor: UIColor = UIColor.redColor()
   var lineWidth: CGFloat = 1
+  var capacity: Int?
   
   init(name: String) {
     self.name = name
   }
   
+  func randomFill(from: CGFloat, to: CGFloat, length: Int) {
+    var x, y: CGFloat
+    let rng = to - from
+    for i in 0...length {
+      x = from + (CGFloat(i) / CGFloat(length)) * rng
+      y = CGFloat(rand()) / CGFloat(RAND_MAX)
+      data.append(CGPointMake(x, y))
+    }
+  }
+  
+  func append(x: CGFloat, y: CGFloat) {
+    let p = CGPointMake(x, y)
+    data.append(p)
+    if (self.capacity != nil && data.count > self.capacity){
+      data.removeAtIndex(0)
+    }
+  }
+  
+  func range() -> CGRect {
+    let yRange = data.reduce((data.first?.y, data.first?.y)) { (min($0.0!, $1.y), max($0.1!, $1.y)) }
+    let xRange = (data.first?.x, data.last?.x)
+    return CGRectMake(xRange.0!, yRange.0!, xRange.1! - xRange.0!, yRange.1! - yRange.0!)
+  }
+  
 }
 
 @IBDesignable class MXChart : UIView {
-  @IBInspectable var borderColor: UIColor = UIColor.blueColor()
+  @IBInspectable var borderColor: UIColor = UIColor.blackColor()
   @IBInspectable var fillColor: UIColor   = UIColor.clearColor()
-  @IBInspectable var plotColor: UIColor   = UIColor.redColor()
+  @IBInspectable var defaultPlotColor: UIColor   = UIColor.redColor()
   @IBInspectable var axesColor: UIColor   = UIColor.grayColor()
   @IBInspectable var textColor: UIColor   = UIColor.blackColor()
   @IBInspectable var borderWidth: CGFloat  = 1
-  @IBInspectable var cornerRadius: CGFloat = 5
+  @IBInspectable var cornerRadius: CGFloat = 3
   
   @IBInspectable var xLabel: String = "X axis"
   @IBInspectable var yLabel: String = "Y axis"
@@ -42,7 +67,7 @@ class MXDataSeries {
   @IBInspectable var showXAxis: Bool = true
   @IBInspectable var showYAxis: Bool = true
 
-  var series = [String(): Array<CGPoint>()]
+  var series = Dictionary<String,MXDataSeries>()
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -55,20 +80,30 @@ class MXDataSeries {
   }
   
   override func prepareForInterfaceBuilder() {
-    var x, y, z: CGFloat
+    var x, s, c: CGFloat
     let n = 100
     series.removeAll(keepCapacity: false)
-    series["Sin"] = Array<CGPoint>()
-    series["Sin"]!.removeAll(keepCapacity: false)
-    series["Cos"] = Array<CGPoint>()
-    series["Cos"]!.removeAll(keepCapacity: false)
+    
+    series["sin"] = MXDataSeries(name: "Sine")
+    series["sin"]!.lineColor = self.defaultPlotColor
+    series["sin"]!.lineWidth = 1
+    
+    series["cos"] = MXDataSeries(name: "Cosine")
+    series["cos"]!.lineColor = UIColor.blueColor()
+    series["cos"]!.lineWidth = 1
+    
     for i in 0...n {
       x = CGFloat(CGFloat(i) * CGFloat(range.width) / CGFloat(n) + CGFloat(range.origin.x))
-      y = CGFloat(sin(x))
-      z = CGFloat(cos(x))
-      series["Sin"]!.append(CGPointMake(x, y))
-      series["Cos"]!.append(CGPointMake(x, z))
+      s = CGFloat(sin(x))
+      c = CGFloat(cos(x))
+      series["sin"]?.append(x, y: s)
+      series["cos"]?.append(x, y: c)
     }
+
+    series["rnd"] = MXDataSeries(name: "Random")
+    series["rnd"]?.randomFill(range.origin.x, to: range.origin.x + range.width, length: n)
+    series["rnd"]!.lineColor = UIColor.greenColor()
+    series["rnd"]!.lineWidth = 2
   }
   
   func remap(point: CGPoint, fromRect: CGRect, toRect: CGRect) -> CGPoint {
@@ -79,21 +114,43 @@ class MXDataSeries {
     return p
   }
   
+  func addPointToSerie(serie: String, x: CGFloat, y: CGFloat) {
+    self.series[serie]?.append(x, y: y)
+    self.setNeedsDisplay()
+  }
+  
+  func autoRescaleOnSerie(serie: String, axes: (x: Bool, y: Bool) ) {
+    let s = self.series[serie]
+    let rect = s!.range()
+    let (x, y, width, height) = (rect.origin.x, rect.origin.y, rect.width, rect.height)
+    switch axes {
+    case (true, _):
+      self.range.origin.x = x
+      self.range.size.width = width
+    case (_, true):
+      self.range.origin.y = y
+      self.range.size.height = height
+    default:
+      return
+    }
+    self.setNeedsDisplay()
+  }
+  
   func drawPlot(inRect: CGRect, atOffset: CGPoint) {
     let context = UIGraphicsGetCurrentContext()
     CGContextSaveGState(context)
     CGContextTranslateCTM(context, atOffset.x, atOffset.y)
     
-    for serie in series.keys {
+    for (name, serie) in series {
       var bezierPath = UIBezierPath()
-      var p = remap(series[serie]![0], fromRect: range, toRect: inRect)
+      var p = remap(serie.data[0], fromRect: range, toRect: inRect)
       bezierPath.moveToPoint(p)
-      for i in 1..<series[serie]!.count {
-        p = remap(series[serie]![i], fromRect: range, toRect: inRect)
+      for i in 1..<serie.data.count {
+        p = remap(serie.data[i], fromRect: range, toRect: inRect)
         bezierPath.addLineToPoint(p)
       }
-      plotColor.setStroke()
-      bezierPath.lineWidth = 1
+      serie.lineColor.setStroke()
+      bezierPath.lineWidth = serie.lineWidth
       bezierPath.stroke()
     }
     

@@ -60,6 +60,12 @@
 		88342DA119CB3D5F0068F865 /* MXStylusAddon.m in Sources */ = {isa = PBXBuildFile; fileRef = 88342DA019CB3D5F0068F865 /* MXStylusAddon.m */; };
 		88342DA319CB3EEB0068F865 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88342DA219CB3EEB0068F865 /* Main.storyboard */; };
 		88D52B3619E7EFB900784AEE /* MXChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FADE4919E44AF300DD90AD /* MXChart.swift */; };
+		88D52B4019E9A5E900784AEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D52B3F19E9A5E900784AEE /* AppDelegate.swift */; };
+		88D52B4219E9A5E900784AEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D52B4119E9A5E900784AEE /* ViewController.swift */; };
+		88D52B4519E9A5E900784AEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D52B4319E9A5E900784AEE /* Main.storyboard */; };
+		88D52B4719E9A5E900784AEE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D52B4619E9A5E900784AEE /* Images.xcassets */; };
+		88D52B4A19E9A5E900784AEE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D52B4819E9A5E900784AEE /* LaunchScreen.xib */; };
+		88D52B5D19E9A63100784AEE /* MXChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FADE4919E44AF300DD90AD /* MXChart.swift */; };
 		88F4281619D74BC1006C6DE5 /* MXDocumentsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8819D5DFD000A0481A /* MXDocumentsList.m */; };
 		88FADE3D19DE92B800DD90AD /* MXDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8835AB8B19D5E00A00A0481A /* MXDocument.m */; };
 		88FADE3E19DE92B800DD90AD /* MXLogDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8822746719D9436100CBB9DB /* MXLogDocument.m */; };
@@ -130,17 +136,19 @@
 		8835AB8819D5DFD000A0481A /* MXDocumentsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocumentsList.m; sourceTree = "<group>"; };
 		8835AB8A19D5E00A00A0481A /* MXDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXDocument.h; sourceTree = "<group>"; };
 		8835AB8B19D5E00A00A0481A /* MXDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXDocument.m; sourceTree = "<group>"; };
+		88D52B3B19E9A5E900784AEE /* MXChartTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MXChartTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D52B3E19E9A5E900784AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D52B3F19E9A5E900784AEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		88D52B4119E9A5E900784AEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		88D52B4419E9A5E900784AEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		88D52B4619E9A5E900784AEE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		88D52B4919E9A5E900784AEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		88E4960919DD4EBD00C00636 /* MXContainer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MXContainer-Bridging-Header.h"; sourceTree = "<group>"; };
-		88E4961819DD6E8D00C00636 /* MXTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXTest.swift; sourceTree = "<group>"; };
 		88E4961A19DD705A00C00636 /* MXDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXDocument.swift; sourceTree = "<group>"; };
 		88E4961B19DD705A00C00636 /* MXLogDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXLogDocument.swift; sourceTree = "<group>"; };
 		88E4961C19DD705A00C00636 /* MXMovieDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXMovieDocument.swift; sourceTree = "<group>"; };
 		88E4963D19DD778500C00636 /* MXDocumentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXDocumentsList.swift; sourceTree = "<group>"; };
 		88E4963F19DE8C9000C00636 /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; };
-		88E4964819DE90C400C00636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88E4964919DE90C400C00636 /* MXDocuments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MXDocuments.h; sourceTree = "<group>"; };
-		88E4965219DE90C500C00636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88E4965319DE90C500C00636 /* MXDocumentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MXDocumentsTests.swift; sourceTree = "<group>"; };
 		88FADE4919E44AF300DD90AD /* MXChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXChart.swift; sourceTree = "<group>"; };
 		DB0DC0AD18C459EC005F4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB0DC0B518C46085005F4723 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -231,6 +239,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		88D52B3819E9A5E900784AEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB8A004016F2DBDA005F87A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -283,60 +298,47 @@
 			name = Documents;
 			sourceTree = "<group>";
 		};
+		88D52B3C19E9A5E900784AEE /* MXChartTest */ = {
+			isa = PBXGroup;
+			children = (
+				88D52B3F19E9A5E900784AEE /* AppDelegate.swift */,
+				88D52B4119E9A5E900784AEE /* ViewController.swift */,
+				88D52B4319E9A5E900784AEE /* Main.storyboard */,
+				88D52B4619E9A5E900784AEE /* Images.xcassets */,
+				88D52B4819E9A5E900784AEE /* LaunchScreen.xib */,
+				88D52B3D19E9A5E900784AEE /* Supporting Files */,
+			);
+			path = MXChartTest;
+			sourceTree = "<group>";
+		};
+		88D52B3D19E9A5E900784AEE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				88D52B3E19E9A5E900784AEE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		88E4960C19DD555200C00636 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				88E4960D19DD678A00C00636 /* Documents */,
 				88E4960919DD4EBD00C00636 /* MXContainer-Bridging-Header.h */,
-				88E4961819DD6E8D00C00636 /* MXTest.swift */,
-				88E4963D19DD778500C00636 /* MXDocumentsList.swift */,
 				88FADE4919E44AF300DD90AD /* MXChart.swift */,
 			);
 			name = Swift;
+			path = Container;
 			sourceTree = "<group>";
 		};
 		88E4960D19DD678A00C00636 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
+				88E4963D19DD778500C00636 /* MXDocumentsList.swift */,
 				88E4961A19DD705A00C00636 /* MXDocument.swift */,
 				88E4961B19DD705A00C00636 /* MXLogDocument.swift */,
 				88E4961C19DD705A00C00636 /* MXMovieDocument.swift */,
 			);
 			name = Documents;
-			sourceTree = "<group>";
-		};
-		88E4964619DE90C400C00636 /* MXDocuments */ = {
-			isa = PBXGroup;
-			children = (
-				88E4964919DE90C400C00636 /* MXDocuments.h */,
-				88E4964719DE90C400C00636 /* Supporting Files */,
-			);
-			path = MXDocuments;
-			sourceTree = "<group>";
-		};
-		88E4964719DE90C400C00636 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				88E4964819DE90C400C00636 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		88E4965019DE90C400C00636 /* MXDocumentsTests */ = {
-			isa = PBXGroup;
-			children = (
-				88E4965319DE90C500C00636 /* MXDocumentsTests.swift */,
-				88E4965119DE90C500C00636 /* Supporting Files */,
-			);
-			path = MXDocumentsTests;
-			sourceTree = "<group>";
-		};
-		88E4965119DE90C500C00636 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				88E4965219DE90C500C00636 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DB8A003A16F2DBDA005F87A6 = {
@@ -345,8 +347,8 @@
 				8827484E19D329B6000B4CB1 /* Squares.codea */,
 				DB8A015B16F73DFF005F87A6 /* Lines.codea */,
 				DB8A004C16F2DBDA005F87A6 /* Container */,
-				88E4964619DE90C400C00636 /* MXDocuments */,
-				88E4965019DE90C400C00636 /* MXDocumentsTests */,
+				88E4960C19DD555200C00636 /* Swift */,
+				88D52B3C19E9A5E900784AEE /* MXChartTest */,
 				DB8A004516F2DBDA005F87A6 /* Frameworks */,
 				DB8A004416F2DBDA005F87A6 /* Products */,
 			);
@@ -357,6 +359,7 @@
 			children = (
 				DB8A004316F2DBDA005F87A6 /* Lines.app */,
 				8827484C19D32872000B4CB1 /* Squares.app */,
+				88D52B3B19E9A5E900784AEE /* MXChartTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,7 +421,6 @@
 				8835AB8719D5DFD000A0481A /* MXDocumentsList.h */,
 				8835AB8819D5DFD000A0481A /* MXDocumentsList.m */,
 				8822746519D80E0600CBB9DB /* Documents */,
-				88E4960C19DD555200C00636 /* Swift */,
 				88E4963F19DE8C9000C00636 /* testing.playground */,
 			);
 			path = Container;
@@ -492,6 +494,23 @@
 			productReference = 8827484C19D32872000B4CB1 /* Squares.app */;
 			productType = "com.apple.product-type.application";
 		};
+		88D52B3A19E9A5E900784AEE /* MXChartTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88D52B5719E9A5E900784AEE /* Build configuration list for PBXNativeTarget "MXChartTest" */;
+			buildPhases = (
+				88D52B3719E9A5E900784AEE /* Sources */,
+				88D52B3819E9A5E900784AEE /* Frameworks */,
+				88D52B3919E9A5E900784AEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MXChartTest;
+			productName = MXChartTest;
+			productReference = 88D52B3B19E9A5E900784AEE /* MXChartTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		DB8A004216F2DBDA005F87A6 /* Lines */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB8A006016F2DBDA005F87A6 /* Build configuration list for PBXNativeTarget "Lines" */;
@@ -523,6 +542,10 @@
 					8827481719D32872000B4CB1 = {
 						DevelopmentTeam = 5FJDWFUQCL;
 					};
+					88D52B3A19E9A5E900784AEE = {
+						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 5FJDWFUQCL;
+					};
 					DB8A004216F2DBDA005F87A6 = {
 						DevelopmentTeam = 5FJDWFUQCL;
 					};
@@ -534,6 +557,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = DB8A003A16F2DBDA005F87A6;
 			productRefGroup = DB8A004416F2DBDA005F87A6 /* Products */;
@@ -542,6 +566,7 @@
 			targets = (
 				DB8A004216F2DBDA005F87A6 /* Lines */,
 				8827481719D32872000B4CB1 /* Squares */,
+				88D52B3A19E9A5E900784AEE /* MXChartTest */,
 			);
 		};
 /* End PBXProject section */
@@ -562,6 +587,16 @@
 				8827484619D32872000B4CB1 /* Images.xcassets in Resources */,
 				8827484F19D329B6000B4CB1 /* Squares.codea in Resources */,
 				8827484819D32872000B4CB1 /* AssetPacks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88D52B3919E9A5E900784AEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D52B4519E9A5E900784AEE /* Main.storyboard in Resources */,
+				88D52B4A19E9A5E900784AEE /* LaunchScreen.xib in Resources */,
+				88D52B4719E9A5E900784AEE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +666,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		88D52B3719E9A5E900784AEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D52B4219E9A5E900784AEE /* ViewController.swift in Sources */,
+				88D52B5D19E9A63100784AEE /* MXChart.swift in Sources */,
+				88D52B4019E9A5E900784AEE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB8A003F16F2DBDA005F87A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +696,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		88D52B4319E9A5E900784AEE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88D52B4419E9A5E900784AEE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		88D52B4819E9A5E900784AEE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88D52B4919E9A5E900784AEE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		DB8A004F16F2DBDA005F87A6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -721,6 +782,60 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		88D52B5819E9A5E900784AEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MXChartTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		88D52B5919E9A5E900784AEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MXChartTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -868,6 +983,15 @@
 			buildConfigurations = (
 				8827484A19D32872000B4CB1 /* Debug */,
 				8827484B19D32872000B4CB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88D52B5719E9A5E900784AEE /* Build configuration list for PBXNativeTarget "MXChartTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88D52B5819E9A5E900784AEE /* Debug */,
+				88D52B5919E9A5E900784AEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
