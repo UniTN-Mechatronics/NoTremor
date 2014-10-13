@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreMotion
 
 class ViewController: UIViewController {
   @IBOutlet var chartView: MXChart!
+  @IBOutlet weak var simulateSwitch: UISwitch!
   
   @IBAction func toggle(sender: UITapGestureRecognizer) {
     self.active = !self.active
@@ -17,16 +19,40 @@ class ViewController: UIViewController {
   
   var count: Int64 = 0
   var active: Bool = false
+  var queue = NSOperationQueue()
+  let motionManager = CMMotionManager()
+  let frequency = 60.0
+  var timer = NSTimer()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    chartView.series["a"] = MXDataSeries(name: "test")
-    chartView.series["a"]?.randomFill(0, to: 1, length: 1)
-    chartView.series["a"]?.lineWidth = 1
-    chartView.series["a"]?.capacity = 100
+    chartView.series["x"] = MXDataSeries(name: "X acc")
+    chartView.series["x"]?.lineWidth = 1
+    chartView.series["x"]?.capacity = 100
+    chartView.series["y"] = MXDataSeries(name: "Y acc")
+    chartView.series["y"]?.lineWidth = 1
+    chartView.series["y"]?.capacity = 100
+    chartView.series["y"]?.lineColor = UIColor.blueColor()
+    chartView.series["z"] = MXDataSeries(name: "Z acc")
+    chartView.series["z"]?.lineWidth = 1
+    chartView.series["z"]?.capacity = 100
+    chartView.series["z"]?.lineColor = UIColor.greenColor()
     count = 0
-    var timer = NSTimer.scheduledTimerWithTimeInterval(1.0 / 60.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     
+    if (motionManager.accelerometerAvailable) {
+      println("Starting accelerometer data collection")
+      motionManager.accelerometerUpdateInterval = 1.0 / frequency
+      motionManager.startAccelerometerUpdatesToQueue(queue) { accelerometerData, error in
+        if (self.active) {
+          self.chartView.addPointToSerie("x", x: CGFloat(self.count), y: CGFloat(accelerometerData.acceleration.x) )
+          self.chartView.addPointToSerie("y", x: CGFloat(self.count), y: CGFloat(accelerometerData.acceleration.y) )
+          self.chartView.addPointToSerie("z", x: CGFloat(self.count), y: CGFloat(accelerometerData.acceleration.z) )
+          self.count++
+        }
+      }
+    }
+    
+    NSTimer.scheduledTimerWithTimeInterval(1.0 / frequency, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
   }
 
   override func didReceiveMemoryWarning() {
@@ -36,10 +62,16 @@ class ViewController: UIViewController {
   
   func update() {
     if (active) {
-      count++
-      let y: CGFloat = CGFloat(rand()) / CGFloat(RAND_MAX) * 2 - 1
-      chartView.addPointToSerie("a", x: CGFloat(count), y: y)
-      chartView.autoRescaleOnSerie("a", axes: (true, false))
+      if (simulateSwitch.on) {
+        let x = CGFloat(rand()) / CGFloat(RAND_MAX) * 2 - 1
+        let y = CGFloat(rand()) / CGFloat(RAND_MAX) * 2 - 1
+        let z = CGFloat(rand()) / CGFloat(RAND_MAX) * 2 - 1
+        chartView.addPointToSerie("x", x: CGFloat(count), y: x)
+        chartView.addPointToSerie("y", x: CGFloat(count), y: y)
+        chartView.addPointToSerie("z", x: CGFloat(count), y: z)
+        count++
+      }
+      chartView.autoRescaleOnSerie("x", axes: (true, false))
     }
   }
 

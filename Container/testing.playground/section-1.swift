@@ -45,5 +45,22 @@ default:
   print("oh no")
 }
 
+var a, b: Int?
+a = 1
+b = 2
+
+switch (a, b) {
+case (.Some(let a1), .Some(let b1)):
+  print("OK: \(a1), \(b1)")
+default:
+  print("NO")
+}
+
+
+var ary = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+ary.removeRange(0..<(ary.count - 7))
+print(ary)
+
+
 
 

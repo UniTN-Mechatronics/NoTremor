@@ -32,30 +32,37 @@ class MXDataSeries {
   func append(x: CGFloat, y: CGFloat) {
     let p = CGPointMake(x, y)
     data.append(p)
-    if (self.capacity != nil && data.count > self.capacity){
-      data.removeAtIndex(0)
+    if let capa = self.capacity {
+      if (data.count > capa){
+        data.removeRange(0..<(data.count - capa))
+      }
     }
   }
   
   func range() -> CGRect {
-    let yRange = data.reduce((data.first?.y, data.first?.y)) { (min($0.0!, $1.y), max($0.1!, $1.y)) }
-    let xRange = (data.first?.x, data.last?.x)
-    return CGRectMake(xRange.0!, yRange.0!, xRange.1! - xRange.0!, yRange.1! - yRange.0!)
+    if let first = data.first {
+      let (y0, y1) = data.reduce((first.y, first.y)) { (min($0.0, $1.y), max($0.1, $1.y)) }
+      let (x0, x1) = (first.x, data.last!.x)
+      return CGRectMake(x0, y0, x1 - x0, y1 - y0)
+    }
+    else {
+      return CGRectMake(0, 0, 1, 1)
+    }
   }
   
 }
 
 @IBDesignable class MXChart : UIView {
-  @IBInspectable var borderColor: UIColor = UIColor.blackColor()
-  @IBInspectable var fillColor: UIColor   = UIColor.clearColor()
-  @IBInspectable var defaultPlotColor: UIColor   = UIColor.redColor()
-  @IBInspectable var axesColor: UIColor   = UIColor.grayColor()
-  @IBInspectable var textColor: UIColor   = UIColor.blackColor()
-  @IBInspectable var borderWidth: CGFloat  = 1
-  @IBInspectable var cornerRadius: CGFloat = 3
   
-  @IBInspectable var xLabel: String = "X axis"
-  @IBInspectable var yLabel: String = "Y axis"
+  @IBInspectable var borderColor:      UIColor = UIColor.blackColor()
+  @IBInspectable var fillColor:        UIColor = UIColor.clearColor()
+  @IBInspectable var defaultPlotColor: UIColor = UIColor.redColor()
+  @IBInspectable var axesColor:        UIColor = UIColor.grayColor()
+  @IBInspectable var textColor:        UIColor = UIColor.blackColor()
+  
+  @IBInspectable var borderWidth:      CGFloat = 1
+  @IBInspectable var cornerRadius:     CGFloat = 3
+  
   @IBInspectable var range: CGRect = CGRectMake(-1, -2, 20, 4) {
     didSet {
       if (self.range.width <= 0 || self.range.height <= 0) {
@@ -64,9 +71,13 @@ class MXDataSeries {
     }
   }
 
-  @IBInspectable var showXAxis: Bool = true
-  @IBInspectable var showYAxis: Bool = true
-
+  @IBInspectable var xLabel:     String = "X axis"
+  @IBInspectable var yLabel:     String = "Y axis"
+  @IBInspectable var showXAxis:  Bool   = true
+  @IBInspectable var showYAxis:  Bool   = true
+  @IBInspectable var showLegend: Bool   = true
+  @IBInspectable var legendLineOffset: CGFloat = 15
+  
   var series = Dictionary<String,MXDataSeries>()
   
   override func awakeFromNib() {
@@ -76,7 +87,6 @@ class MXDataSeries {
   override func drawRect(rect: CGRect) {
     super.drawRect(rect)
     drawChartView(fillColor, rectangle: self.bounds, strokeWidth: borderWidth, radius: cornerRadius, xLabelText: xLabel, yLabelText: yLabel)
-    
   }
   
   override func prepareForInterfaceBuilder() {
@@ -143,15 +153,17 @@ class MXDataSeries {
     
     for (name, serie) in series {
       var bezierPath = UIBezierPath()
-      var p = remap(serie.data[0], fromRect: range, toRect: inRect)
-      bezierPath.moveToPoint(p)
-      for i in 1..<serie.data.count {
-        p = remap(serie.data[i], fromRect: range, toRect: inRect)
-        bezierPath.addLineToPoint(p)
+      if let startPoint = serie.data.first {
+        var p = remap(startPoint, fromRect: range, toRect: inRect)
+        bezierPath.moveToPoint(p)
+        for element in serie.data {
+          p = remap(element, fromRect: range, toRect: inRect)
+          bezierPath.addLineToPoint(p)
+        }
+        serie.lineColor.setStroke()
+        bezierPath.lineWidth = serie.lineWidth
+        bezierPath.stroke()
       }
-      serie.lineColor.setStroke()
-      bezierPath.lineWidth = serie.lineWidth
-      bezierPath.stroke()
     }
     
     if (showXAxis) {
@@ -188,7 +200,6 @@ class MXDataSeries {
     let labelHeight: CGFloat = 15
     let rectWidth = rectangle.width - labelHeight - strokeWidth
     let rectHeight = rectangle.height - labelHeight - strokeWidth
-    let minusHeight = -rectHeight
     let rectOffset = CGPointMake(rectangle.origin.x, rectangle.origin.y + strokeWidth / 2.0)
     
     //// Chart Drawing
@@ -209,7 +220,6 @@ class MXDataSeries {
     
     //// Label styles
     let labelFont = UIFont(name: "Helvetica", size: 9)
-    let labelColor = self.textColor
     let cLabelStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
     let lLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as NSMutableParagraphStyle
     let rLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as NSMutableParagraphStyle
@@ -218,6 +228,22 @@ class MXDataSeries {
     lLabelStyle.alignment = NSTextAlignment.Left
     rLabelStyle.alignment = NSTextAlignment.Right
     
+    //// Legend drawing
+    if self.showLegend {
+      var offset: CGFloat = 0
+      let labelMargin = cornerRadius + borderWidth
+      CGContextSaveGState(context)
+      
+      for (k, v) in self.series {
+        let text2Rect = CGRectMake(labelHeight + labelMargin, offset + labelMargin, 112, 20)
+        let text2FontAttributes = [NSFontAttributeName: UIFont(name: "Helvetica", size: 12), NSForegroundColorAttributeName: v.lineColor, NSParagraphStyleAttributeName: lLabelStyle]
+        v.name.drawInRect(text2Rect, withAttributes: text2FontAttributes);
+        offset += legendLineOffset
+      }
+      CGContextRestoreGState(context)
+    }
+    
+    let labelColor = self.textColor
     let labelFontAttributes = [NSFontAttributeName: labelFont, NSForegroundColorAttributeName: labelColor, NSParagraphStyleAttributeName: cLabelStyle]
     let minLabelFontAttributes = [NSFontAttributeName: labelFont, NSForegroundColorAttributeName: labelColor, NSParagraphStyleAttributeName: lLabelStyle]
     let maxLabelFontAttributes = [NSFontAttributeName: labelFont, NSForegroundColorAttributeName: labelColor, NSParagraphStyleAttributeName: rLabelStyle]
@@ -238,14 +264,18 @@ class MXDataSeries {
     CGContextTranslateCTM(context, rectOffset.x, rectOffset.y)
     CGContextRotateCTM(context, -90 * CGFloat(M_PI) / 180)
     
-    let yLabelRect = CGRectMake(minusHeight, 0, rectHeight, labelHeight)
+    let yLabelRect = CGRectMake(-rectHeight, 0, rectHeight, labelHeight)
     
     NSString(string: yLabelText).drawInRect(yLabelRect, withAttributes: labelFontAttributes);
     NSString(string: "\(range.origin.y)").drawInRect(yLabelRect, withAttributes: minLabelFontAttributes);
     NSString(string: "\(range.origin.y + range.height)").drawInRect(yLabelRect, withAttributes: maxLabelFontAttributes);
     CGContextRestoreGState(context)
+    
   }
-
-  
 }
+
+
+
+
+
 
