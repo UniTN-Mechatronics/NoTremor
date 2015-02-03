@@ -17,6 +17,7 @@ typedef enum
 } tableSections;
 
 @interface MXConfigController ()
+@property (weak, nonatomic) IBOutlet UISwitch *enableChart;
 @property NSArray *sectionTitles;
 @property NSString *documentsDir;
 @property (strong, atomic) UIDocumentInteractionController* docController;
@@ -92,11 +93,24 @@ typedef enum
 {
   MXDocument *doc = [_documents documentAtIndexPath:indexPath];
   if ([doc isKindOfClass:MXLogDocument.class]) {
-    self.textView.text = [NSString stringWithContentsOfFile:doc.filePath
-                                                  encoding:NSUTF8StringEncoding
-                                                     error:NULL];
+    NSString *data = [NSString stringWithContentsOfFile:doc.filePath
+                                               encoding:NSUTF8StringEncoding
+                                                  error:NULL];
+    self.textView.text = data;
     self.fileDescription.text = doc.fileDescription;
-//    [(MXLogDocument *)doc renderInView:self.customView];
+    if ([self.enableChart isOn]) {
+      [self.chartView reset];
+
+      [self.chartView addSeries:@"x" withLabel:@"x pos"];
+      [self.chartView.series[@"x"] addFromString:data xCol:0 yCol:3];
+      [self.chartView.series[@"x"] setLineColor:[UIColor redColor]];
+
+      [self.chartView addSeries:@"y" withLabel:@"y pos"];
+      [self.chartView.series[@"y"] addFromString:self.textView.text xCol:0 yCol:4];
+      [self.chartView.series[@"y"] setLineColor:[UIColor greenColor]];
+
+      [self.chartView autoRescaleOnSerie:@"y" xAxis:YES yAxis:NO];
+    }
   }
 
   else if ([doc isKindOfClass:MXMovieDocument.class]) {

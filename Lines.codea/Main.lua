@@ -23,6 +23,9 @@ function setup()
     cameraPos = readLocalData("cameraPos", 0)
     camOnTop = readLocalData("camOnTop", true)
     animatePressure = readLocalData("animatePressure", false)
+    blanking = readLocalData("blanking", false)
+    targetOffset = readLocalData("targetOffset", 0)
+    loopDelay = readLocalData("loopDelay", 1)
 
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
@@ -38,6 +41,9 @@ function setup()
     parameter.boolean("camOnTop", camOnTop, function() saveLocalData("camOnTop", camOnTop) end)
     parameter.boolean("hideNavbar", false)
     parameter.boolean("animatePressure", animatePressure, function() saveLocalData("animatePressure", animatePressure) end)
+    parameter.boolean("blanking", blanking, function() path.blanking = blanking; saveLocalData("blanking", blanking) end)
+    parameter.boolean("targetOffset", targetOffset, function() path.targetOffset = targetOffset; saveLocalData("targetOffset", targetOffset) end)
+    parameter.integer("loopDelay", 1, 20, loopDelay, function() path.loopDelay = loopDelay saveLocalData("loopDelay", loopDelay) end)
     buttonStart.action = startStop
     touches = {}
     states = {}
@@ -80,7 +86,7 @@ end
 
 
 function drawCamera(active)
-    if camera and active then
+    if camera and active and cameraPos then
         cameraSource(CAMERA_FRONT)
         sprite(CAMERA, WIDTH/2, HEIGHT/2+cameraPos, WIDTH)
     end

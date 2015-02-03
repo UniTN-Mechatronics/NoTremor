@@ -4,11 +4,14 @@ function PBPath:init(x, y)
     -- you can accept and set parameters here
     self.p = vec2(x, y)
     self.t = vec2(x, y)
+    self.lastTouch = vec2(x,y)
+    self.buffer = {}
     self.size = 20
     self.lapse = -1
     self.r = 0 
     self.g = 0
     self.path = {}
+    self.pathDesc = ""
     self.tweens = {}
     self.touches = {}
     self.minDelay = 0
@@ -20,6 +23,9 @@ function PBPath:init(x, y)
     self.current = {i=0, prev=0, epoch=ElapsedTime, startPos=0}
     self.steps = 0
     self.dataBuffer = {}
+    self.blanking = false
+    self.targetOffset = false
+    self.loopDelay = 1
 end
 
 function PBPath:check()
@@ -32,20 +38,37 @@ function PBPath:header(n)
     desc = desc.."\n# date: "..os.date()
     desc = desc.."\n# steps: "..self.steps
     desc = desc.."\n# min delay (s): "..self.minDelay
-    desc = desc.."\n# max delay: (s)"..self.avgDelay
+    desc = desc.."\n# max delay (s): "..self.avgDelay
     desc = desc.."\n# disturbing lines: "..disturbingLines
-    desc = desc.."\n# subject name: "..subject.."\n"
-    for i, v in ipairs(self.path) do
-        desc = desc..string.format("# p=%f t=%f\n", v.x, v.dt)
-    end
-    desc = desc.."t t_rel n x y px x_rel touch_state lapse ax ay az pressure\n"
+    desc = desc.."\n# subject name: "..subject
+    desc = desc.."\n# blanking: "..tostring(self.blanking)
+    desc = desc.."\n# offset (phisical masking): "..tostring(self.targetOffset)
+    desc = desc.."\n# loop delay buffer size (#): "..self.loopDelay.."\n"
+    desc = desc..self.pathDesc
+    desc = desc.."# t t_rel n delayed_x delayed_y x y line_pos x_rel touch_state lapse ax ay az pressure\n"
     return desc
 end
 
 function PBPath:draw()
     -- Codea does not automatically call this method
+    if (self.loopDelay == 1) then
+        self.t.x = self.lastTouch.x
+        self.t.y = self.lastTouch.y
+    else
+        local pt = vec2(0,0)
+        pt.x = self.lastTouch.x
+        pt.y = self.lastTouch.y
+        table.insert(self.buffer, pt)
+        if (#self.buffer > self.loopDelay) then
+            self.t = table.remove(self.buffer, 1)
+        else
+            self.t = self.buffer[1]
+        end
+    end
+
     local red = color(243, 12, 40, 255)
     local green = color(65, 189, 45, 255)
+    local maskOn = 0
     pushStyle()
     strokeWidth(5)
     pushMatrix()
@@ -53,7 +76,11 @@ function PBPath:draw()
         -- tween(0.5, self.t, {x=WIDTH/2, y=HEIGHT/2})
         self.t = {x=WIDTH/2, y=HEIGHT/2}
     end
-    translate(self.t.x, self.t.y)
+    if targetOffset then
+        translate(self.t.x, HEIGHT/4*3)
+    else
+        translate(self.t.x, self.t.y)
+    end
 
     pushMatrix()
     if isStylusConnected() and animatePressure then
@@ -84,8 +111,14 @@ function PBPath:draw()
             line(p.x, 0, p.x, HEIGHT)
             ti = ElapsedTime - self.current.epoch - 1
             self.current.prev = self.lapse
-            dx = math.abs(self.t.x - self.current.startPos) / math.abs(self.path[1].x - self.current.startPos)
-        table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure()})
+            dx = math.abs(self.lastTouch.x - self.current.startPos) / math.abs(self.path[1].x - self.current.startPos)
+            if self.blanking and dx > 0.5 and ti < 1.5 and ti > 0 and self.rotation == 45 then
+                fill(0)
+                noStroke()
+                rect(0,0,WIDTH,HEIGHT)
+                maskOn = 1
+            end
+            table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, self.lastTouch.x, self.lastTouch.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure(), maskOn})
         end
     else
         fill(green)
@@ -97,19 +130,19 @@ function PBPath:draw()
     
     self.r = (self.t.x / WIDTH) * 256
     self.g = (self.t.y / HEIGHT) * 256
-    
 end
 
 function PBPath:touched(touch)
+    -- Codea does not automatically call this method
     if touch.state ==  BEGAN then
+        self.buffer = {}
         table.insert(self.touches, touch.id)
     elseif touch.state == ENDED then
         table.remove(self.touches)
     end
-    -- Codea does not automatically call this method
     if (touch.state == MOVING or touch.state == BEGAN) and touch.id == self.touches[1] then
-        self.t.x = touch.x
-        self.t.y = touch.y
+        self.lastTouch.x = touch.x
+        self.lastTouch.y = touch.y
     end
 end
 
@@ -162,7 +195,9 @@ function PBPath:makePath(n)
         until dx <= WIDTH * 0.7 and dx >= WIDTH * 0.3
         prevx = rx
         table.insert(self.path, {x=rx, dt=dt})
+        self.pathDesc = self.pathDesc..string.format("# p=%f t=%f\n", rx, dt)
     end
+
     self.tweens = {tween(2, self, {rotation=45, lapse=self.path[1].dt}, tween.easing.quadIn)}
     self.current.startPos = self.path[1].x
     for i = 1, n do

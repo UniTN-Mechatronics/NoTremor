@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Addons/MXStylusAddon.h"
 #import "MXDocumentsList.h"
+#import "Lines-Swift.h"
 
 @interface MXConfigController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate>
 
@@ -20,4 +21,5 @@
 @property (strong, nonatomic) MXDocumentsList *documents;
 @property (weak, nonatomic) IBOutlet UIView *customView;
 @property (weak, nonatomic) IBOutlet UILabel *fileDescription;
+@property (weak, nonatomic) IBOutlet MXChart *chartView;
 @end
