@@ -66,10 +66,12 @@ end
 
 function startStop(start)
     if start then
+        collectgarbage("stop")
         path:makePath(steps)
         buttonStart.displayName = "MX:stop"
         createDisturbingLines()
     else
+        collectgarbage("restart")
         path:endAnimation()
         buttonStart.displayName = "MX:start"
     end
