@@ -149,6 +149,7 @@
 		88E4961C19DD705A00C00636 /* MXMovieDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXMovieDocument.swift; sourceTree = "<group>"; };
 		88E4963D19DD778500C00636 /* MXDocumentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXDocumentsList.swift; sourceTree = "<group>"; };
 		88E4963F19DE8C9000C00636 /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; };
+		88F07DB51A9E046A0078F836 /* libversion */ = {isa = PBXFileReference; lastKnownFileType = text; path = libversion; sourceTree = "<group>"; };
 		88FADE4919E44AF300DD90AD /* MXChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MXChart.swift; sourceTree = "<group>"; };
 		DB0DC0AD18C459EC005F4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB0DC0B518C46085005F4723 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -344,6 +345,7 @@
 		DB8A003A16F2DBDA005F87A6 = {
 			isa = PBXGroup;
 			children = (
+				88F07DB51A9E046A0078F836 /* libversion */,
 				8827484E19D329B6000B4CB1 /* Squares.codea */,
 				DB8A015B16F73DFF005F87A6 /* Lines.codea */,
 				DB8A004C16F2DBDA005F87A6 /* Container */,
@@ -367,6 +369,8 @@
 		DB8A004516F2DBDA005F87A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB8A006316F2E019005F87A6 /* libcodea.a */,
+				DB8A006516F2E019005F87A6 /* libtools.a */,
 				8827481519D30889000B4CB1 /* MediaPlayer.framework */,
 				881CFFE719CC5B3A00A39D83 /* CoreBluetooth.framework */,
 				881CFFE519CC55DD00A39D83 /* WacomDevice.framework */,
@@ -374,8 +378,6 @@
 				DB0DC0B918C4608E005F4723 /* Accelerate.framework */,
 				DB0DC0B718C4608A005F4723 /* CoreLocation.framework */,
 				DB0DC0B518C46085005F4723 /* CoreImage.framework */,
-				DB8A006316F2E019005F87A6 /* libcodea.a */,
-				DB8A006516F2E019005F87A6 /* libtools.a */,
 				DB8A006616F2E019005F87A6 /* RuntimeResources.bundle */,
 				DB8A006716F2E019005F87A6 /* ToolsResources.bundle */,
 				DB3B3F6217815CFE00A992DB /* Security.framework */,
@@ -645,7 +647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ! -f \"$PROJECT_DIR/Libs/libcodea.a\" ]\nthen\n    echo \"note: Downloading Codea Library...\"\n    curl -o \"$PROJECT_DIR/Libs/libcodea.a.gz\" \"http://twolivesleft.com/Codea/Libs/libcodea2.0.a.gz\"\n\n    if [[ $? == 0 ]]\n    then\n        gunzip \"$PROJECT_DIR/Libs/libcodea.a.gz\"\n    else\n        echo \"error: Failed to Download Codea Library. Please ensure you have an active Internet connection.\"\n        return 1\n    fi\nfi\n\nif [ ! -f \"$PROJECT_DIR/Libs/libtools.a\" ]\nthen\n    echo \"note: Downloading Tools Library...\"\n    curl -o \"$PROJECT_DIR/Libs/libtools.a.gz\" \"http://twolivesleft.com/Codea/Libs/libtools2.0.a.gz\"\n\n    if [[ $? == 0 ]]\n    then\n        gunzip \"$PROJECT_DIR/Libs/libtools.a.gz\"\n    else\n        echo \"error: Failed to Download Tools Library. Please ensure you have an active Internet connection.\"\n        return 1\n    fi\nfi\n\n\n\n";
+			shellScript = "MVERS=`cat libversion`\n\necho \"note: building against lib version $MVERS.\"\n\nif [ ! -f \"$PROJECT_DIR/Libs/libcodea.a\" ]\nthen\necho \"note: Downloading Codea Library...\"\ncurl -o \"$PROJECT_DIR/Libs/libcodea.a.gz\" \"http://codea.io/lib/libcodea-$MVERS.a.gz\"\n\nif [[ $? == 0 ]]\nthen\ngunzip \"$PROJECT_DIR/Libs/libcodea.a.gz\"\nelse\necho \"error: Failed to Download Codea Library. Please ensure you have an active Internet connection.\"\nreturn 1\nfi\nfi\n\nif [ ! -f \"$PROJECT_DIR/Libs/libtools.a\" ]\nthen\necho \"note: Downloading Tools Library...\"\ncurl -o \"$PROJECT_DIR/Libs/libtools.a.gz\" \"http://codea.io/lib/libtools-$MVERS.a.gz\"\n\nif [[ $? == 0 ]]\nthen\ngunzip \"$PROJECT_DIR/Libs/libtools.a.gz\"\nelse\necho \"error: Failed to Download Tools Library. Please ensure you have an active Internet connection.\"\nreturn 1\nfi\nfi\n\n\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

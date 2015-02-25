@@ -11,15 +11,17 @@
 #import "MXDocumentsList.h"
 #import "Lines-Swift.h"
 
-@interface MXConfigController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate>
+@interface MXConfigController
+    : UIViewController <UITableViewDataSource, UITableViewDelegate,
+                        UIDocumentInteractionControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (strong, nonatomic) NSMutableArray *logFiles;
-@property (strong, nonatomic) NSMutableArray *movieFiles;
-@property (strong, nonatomic) MXDocumentsList *documents;
-@property (weak, nonatomic) IBOutlet UIView *customView;
-@property (weak, nonatomic) IBOutlet UILabel *fileDescription;
-@property (weak, nonatomic) IBOutlet MXChart *chartView;
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
+@property(weak, nonatomic) IBOutlet UIView *contentView;
+@property(weak, nonatomic) IBOutlet UITextView *textView;
+@property(strong, nonatomic) NSMutableArray *logFiles;
+@property(strong, nonatomic) NSMutableArray *movieFiles;
+@property(strong, nonatomic) MXDocumentsList *documents;
+@property(weak, nonatomic) IBOutlet UIView *customView;
+@property(weak, nonatomic) IBOutlet UILabel *fileDescription;
+@property(weak, nonatomic) IBOutlet MXChart *chartView;
 @end

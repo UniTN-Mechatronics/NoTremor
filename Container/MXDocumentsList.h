@@ -12,10 +12,11 @@
 
 @interface MXDocumentsList : NSObject
 @property NSMutableDictionary *list;
-@property NSMutableArray      *types;
-@property NSString            *folderPath;
+@property NSMutableArray *types;
+@property NSString *folderPath;
 
-+ (MXDocumentsList *)documentsListAtPath:(NSString *)path forTypes:(NSArray *)types;
++ (MXDocumentsList *)documentsListAtPath:(NSString *)path
+                                forTypes:(NSArray *)types;
 
 - (void)scanFolder:(NSString *)path forTypes:(NSArray *)types;
 - (MXDocument *)documentAtIndexPath:(NSIndexPath *)indexPath;

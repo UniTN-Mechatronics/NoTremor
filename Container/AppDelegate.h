@@ -10,17 +10,16 @@
 #import "MXCodeaViewController.h"
 #import "MXConfigController.h"
 #import "Addons/MXStylusAddon.h"
-#define  appDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
-
+#define appDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 @class CodeaViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *navController;
-@property (strong, nonatomic) MXCodeaViewController *codeaController;
-@property (strong, nonatomic) UIViewController *configController;
-@property (strong, nonatomic) MXStylusAddon *stylusAddon;
+@property(strong, nonatomic) UIWindow *window;
+@property(strong, nonatomic) UINavigationController *navController;
+@property(strong, nonatomic) MXCodeaViewController *codeaController;
+@property(strong, nonatomic) UIViewController *configController;
+@property(strong, nonatomic) MXStylusAddon *stylusAddon;
 
 @end

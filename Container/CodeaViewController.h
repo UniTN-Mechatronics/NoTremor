@@ -10,22 +10,25 @@
 
 @protocol CodeaAddon;
 
-typedef enum CodeaViewMode
-{
-    CodeaViewModeStandard,
-    CodeaViewModeFullscreen,
-    CodeaViewModeFullscreenNoButtons,
+typedef enum CodeaViewMode {
+  CodeaViewModeStandard,
+  CodeaViewModeFullscreen,
+  CodeaViewModeFullscreenNoButtons,
 } CodeaViewMode;
 
 @interface CodeaViewController : UIViewController
 
-@property (nonatomic, assign) CodeaViewMode viewMode;
-@property (nonatomic, assign) BOOL paused;
+@property(nonatomic, assign) CodeaViewMode viewMode;
+@property(nonatomic, assign) BOOL paused;
 
-- (void) setViewMode:(CodeaViewMode)viewMode animated:(BOOL)animated;
+- (instancetype)initWithProjectAtPath:(NSString *)path;
 
-- (void) loadProjectAtPath:(NSString*)path;
+- (void)setViewMode:(CodeaViewMode)viewMode animated:(BOOL)animated;
 
-- (void) registerAddon:(id<CodeaAddon>)addon;
+- (void)loadProjectAtPath:(NSString *)path;
+
+- (void)registerAddon:(id<CodeaAddon>)addon;
+
+- (void)restart;
 
 @end

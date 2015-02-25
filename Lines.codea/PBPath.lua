@@ -45,7 +45,7 @@ function PBPath:header(n)
     desc = desc.."\n# offset (phisical masking): "..tostring(self.targetOffset)
     desc = desc.."\n# loop delay buffer size (#): "..self.loopDelay.."\n"
     desc = desc..self.pathDesc
-    desc = desc.."t t_rel n delayed_x delayed_y x y line_pos x_rel touch_state lapse ax ay az pressure\n"
+    desc = desc.."t t_rel n delayed_x delayed_y x y line_pos x_rel touch_state lapse ax ay az pressure mask\n\n"
     return desc
 end
 
@@ -166,7 +166,7 @@ function PBPath:endAnimation()
         io.output(io.open(self.file, "w"))
         io.write(self:header(n, degree))
         for i, l in ipairs(self.dataBuffer) do
-            io.write(table.concat(l, " ").."\n")
+            io.write(table.concat(l, "\t").."\n")
         end
         io.close()
         self.dataBuffer = {}
