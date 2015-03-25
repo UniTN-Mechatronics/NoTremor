@@ -89,6 +89,7 @@ function PBPath:draw()
     stroke(0)
     line(0, -self.size, 0, self.size)
     line(-self.size, 0, self.size, 0)
+    
     if self.animating then
         rotate(self.rotation)
         if self.rotation == 45 then
@@ -99,8 +100,7 @@ function PBPath:draw()
         rect(-self.size/2, -self.size/2, self.size, self.size)
         popMatrix()
         popMatrix()
-        strokeWidth(4)
-        stroke(13, 0, 255, 255)
+        
         if #self.path > 0 then
             local p, ti, dx
             if self.lapse <= 1 and self.current.prev > 1 then
@@ -108,7 +108,14 @@ function PBPath:draw()
                 self.current.epoch = ElapsedTime
             end
             p = self.path[1]
+            strokeWidth(5)
+            stroke(0, 253, 253, 255)
             line(p.x, 0, p.x, HEIGHT)
+            if mirrorDisturber then
+                strokeWidth(5)
+                stroke(255, 0, 0, 255)
+                line(p.distx or 0, 0, p.distx or 0, HEIGHT)
+            end
             ti = ElapsedTime - self.current.epoch - 1
             self.current.prev = self.lapse
             dx = math.abs(self.lastTouch.x - self.current.startPos) / math.abs(self.path[1].x - self.current.startPos)
@@ -185,16 +192,23 @@ function PBPath:makePath(n)
     self.steps = n
     self.path = {}
     -- tween.resetAll()
-    local rx, t, dt, dn1, dx
+    local rx, t, dt, dn1, dx, distx
     local prevx = WIDTH/2
     for i = 1, n do
         dt = self:rand()
         repeat
             rx = math.random(10, WIDTH-10)
-            dx = math.abs(rx - prevx)
-        until dx <= WIDTH * 0.7 and dx >= WIDTH * 0.3
+            dx = rx - prevx
+        until math.abs(dx) <= WIDTH * 0.7 and math.abs(dx) >= WIDTH * 0.3
+        distx = prevx - dx
+        if distx <= 0 then
+            distx = 10
+        end
+        if distx >= WIDTH then
+            distx = WIDTH - 10
+        end
         prevx = rx
-        table.insert(self.path, {x=rx, dt=dt})
+        table.insert(self.path, {x=rx, dt=dt, distx=distx})
         self.pathDesc = self.pathDesc..string.format("# p=%f t=%f\n", rx, dt)
     end
 
@@ -228,5 +242,6 @@ function PBPath:rand()
     --return self.minDelay + math.random() * (self.avgDelay - self.minDelay)
     return (poisson(self.avgDelay*10.0, self.minDelay*10.0))/10.0
 end
+
 
 

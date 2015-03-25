@@ -16,6 +16,7 @@ function setup()
     size = readLocalData("size", 60)
     steps = readLocalData("steps", 10)
     disturbingLines = readLocalData("disturbingLines", 3)
+    mirrorDisturber = readLocalData("mirrorDisturber", false)
     animateBackground = readLocalData("animateBackground", false)
     recordVideo = readLocalData("recordVideo", false)
     subject = readLocalData("subject", "Unknown")
@@ -30,6 +31,7 @@ function setup()
     parameter.text("subject", subject, function() saveLocalData("subject", subject) end)
     parameter.action("reset count", function() saveLocalData("runid", 0) end)
     parameter.integer("disturbingLines", 0, 10, disturbingLines, function() saveLocalData("disturbingLines", disturbingLines) end)
+    parameter.boolean("mirrorDisturber", mirrorDisturber, function() saveLocalData("mirrorDisturber", mirrorDisturber) end)
     parameter.integer("steps", 1, 50, steps, function() saveLocalData("steps", steps) end)
     parameter.number("avgDelay", 0, 5, path.avgDelay, function() avgDelay = round(avgDelay, 1); path.avgDelay = avgDelay; saveLocalData("avgDelay", avgDelay) end)
     parameter.number("minDelay", 0, 5, path.minDelay, function() minDelay = round(minDelay, 1); path.minDelay = minDelay; saveLocalData("minDelay", minDelay) end)
@@ -100,7 +102,7 @@ function draw()
     if animateBackground then
         background(path.r, path.g, 50)
         else
-        background(200)
+        background(255, 255, 255, 255)
     end
     
     drawCamera(not camOnTop)
@@ -157,6 +159,8 @@ function poisson(lambda, cut)
     until k - 1 >= cut
     return k - 1
 end
+
+
 
 
 
