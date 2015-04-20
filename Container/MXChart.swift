@@ -274,9 +274,9 @@ class MXDataSeries : NSObject {
 
     //// Label styles
     let labelFont = UIFont(name: "Helvetica", size: 9)!
-    let cLabelStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as NSMutableParagraphStyle
-    let lLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as NSMutableParagraphStyle
-    let rLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as NSMutableParagraphStyle
+    let cLabelStyle = NSMutableParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+    let lLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as! NSMutableParagraphStyle
+    let rLabelStyle: NSMutableParagraphStyle = cLabelStyle.mutableCopy() as! NSMutableParagraphStyle
 
     cLabelStyle.alignment = NSTextAlignment.Center
     lLabelStyle.alignment = NSTextAlignment.Left

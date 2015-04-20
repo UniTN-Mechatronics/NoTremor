@@ -45,7 +45,7 @@ function PBPath:header(n)
     desc = desc.."\n# offset (phisical masking): "..tostring(self.targetOffset)
     desc = desc.."\n# loop delay buffer size (#): "..self.loopDelay.."\n"
     desc = desc..self.pathDesc
-    desc = desc.."t t_rel n delayed_x delayed_y x y line_pos x_rel touch_state lapse ax ay az pressure mask\n\n"
+    desc = desc.."t t_rel n delayed_x delayed_y x y line_pos x_rel mirror touch_state lapse ax ay az pressure mask\n\n"
     return desc
 end
 
@@ -115,6 +115,8 @@ function PBPath:draw()
                 strokeWidth(5)
                 stroke(255, 0, 0, 255)
                 line(p.distx or 0, 0, p.distx or 0, HEIGHT)
+            else
+                p.distx = -1
             end
             ti = ElapsedTime - self.current.epoch - 1
             self.current.prev = self.lapse
@@ -125,7 +127,7 @@ function PBPath:draw()
                 rect(0,0,WIDTH,HEIGHT)
                 maskOn = 1
             end
-            table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, self.lastTouch.x, self.lastTouch.y, p.x, dx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure(), maskOn})
+            table.insert(self.dataBuffer, {ElapsedTime, ti, self.current.i, self.t.x, self.t.y, self.lastTouch.x, self.lastTouch.y, p.x, dx, p.distx, CurrentTouch.state, self.lapse, UserAcceleration.x, UserAcceleration.y, UserAcceleration.z, stylusPressure(), maskOn})
         end
     else
         fill(green)
@@ -199,7 +201,7 @@ function PBPath:makePath(n)
         repeat
             rx = math.random(10, WIDTH-10)
             dx = rx - prevx
-        until math.abs(dx) <= WIDTH * 0.7 and math.abs(dx) >= WIDTH * 0.3
+        until math.abs(dx) <= WIDTH * 0.4 and math.abs(dx) >= WIDTH * 0.05
         distx = prevx - dx
         if distx <= 0 then
             distx = 10
