@@ -40,7 +40,7 @@ function PBPath:header(n)
     desc = desc.."\n# min delay (s): "..self.minDelay
     desc = desc.."\n# max delay (s): "..self.avgDelay
     desc = desc.."\n# disturbing lines: "..disturbingLines
-    desc = desc.."\n# mirror disturber: "..mirrorDisturber
+    desc = desc.."\n# mirror disturber: "..tostring(mirrorDisturber)
     desc = desc.."\n# subject name: "..subject
     desc = desc.."\n# blanking: "..tostring(self.blanking)
     desc = desc.."\n# offset (phisical masking): "..tostring(self.targetOffset)
