@@ -26,10 +26,11 @@ typedef enum { sectionLogs = 0, sectionMovies } tableSections;
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  _sectionTitles = @[ @"Log files", @"Videos" ];
+  _sectionTitles = @[ @"Log files"]; //, @"Videos" ];
   self.documents = [MXDocumentsList
       documentsListAtPath:nil
-                 forTypes:@[ MXLogDocument.class, MXMovieDocument.class ]];
+                    forTypes:@[ MXLogDocument.class] //, MXMovieDocument.class ]
+                    ];
   self.docController = [[UIDocumentInteractionController alloc] init];
   [self.docController setDelegate:self];
   [self.tableView reloadData];
@@ -123,7 +124,7 @@ typedef enum { sectionLogs = 0, sectionMovies } tableSections;
   }
 
   else {
-    self.textView.text = @"Currently unsuported";
+    self.textView.text = @"Currently unsupported";
   }
   [[tableView cellForRowAtIndexPath:indexPath] setEditing:NO animated:NO];
   self.shareButton.enabled = YES;
@@ -188,5 +189,27 @@ typedef enum { sectionLogs = 0, sectionMovies } tableSections;
     UIView *view = _tableView.viewForBaselineLayout;
     [_docController presentOpenInMenuFromRect:frame inView:view animated:YES];
   }
+}
+
+
+
+- (IBAction)deleteAllFiles:(id)sender {
+  
+  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Deleting all files"
+                                                                 message:@"Do you really want to delete all files?"
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+  
+  UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {}];
+  UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * action) {
+                                                      [self.documents removeAllDocuments];
+                                                      [self.tableView reloadData];
+                                                    }];
+  
+  [alert addAction:noAction];
+  [alert addAction:yesAction];
+  [self presentViewController:alert animated:YES completion:nil];
+  
 }
 @end

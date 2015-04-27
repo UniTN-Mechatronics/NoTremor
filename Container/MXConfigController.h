@@ -24,4 +24,5 @@
 @property(weak, nonatomic) IBOutlet UIView *customView;
 @property(weak, nonatomic) IBOutlet UILabel *fileDescription;
 @property(weak, nonatomic) IBOutlet MXChart *chartView;
+- (IBAction)deleteAllFiles:(id)sender;
 @end

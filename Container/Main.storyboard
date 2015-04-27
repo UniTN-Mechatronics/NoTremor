@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="mdk-GB-GsJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="mdk-GB-GsJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -61,7 +61,7 @@
             </objects>
             <point key="canvasLocation" x="-971" y="-179"/>
         </scene>
-        <!--Data files-->
+        <!--Config Controller-->
         <scene sceneID="moq-vN-c0c">
             <objects>
                 <viewController id="yp3-sU-Xuj" customClass="MXConfigController" sceneMemberID="viewController">
@@ -74,7 +74,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" editable="NO" text="None" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-f1-fCz">
-                                <rect key="frame" x="308" y="101" width="708" height="458"/>
+                                <rect key="frame" x="308" y="101" width="704" height="659"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -114,33 +114,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veS-HS-FhA" customClass="MXChart" customModule="Lines" customModuleProvider="target">
-                                <rect key="frame" x="308" y="567" width="708" height="201"/>
-                                <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L0Y-dL-Cdo">
-                                        <rect key="frame" x="651" y="8" width="51" height="31"/>
-                                    </switch>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="xLabel" value="Time (s)"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="yLabel" value="Value"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showXAxis" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showYAxis" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="rect" keyPath="range">
-                                        <rect key="value" x="-3" y="0.0" width="20" height="1024"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="4Qi-f1-fCz" secondAttribute="trailing" constant="-12" id="0if-uZ-0Ra"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Qi-f1-fCz" secondAttribute="trailing" constant="-8" id="0if-uZ-0Ra"/>
                             <constraint firstItem="Zan-Vj-COQ" firstAttribute="top" secondItem="m7R-Je-OlT" secondAttribute="bottom" id="Fmi-ad-EBu"/>
                             <constraint firstItem="4Qi-f1-fCz" firstAttribute="top" secondItem="DRN-Vn-wUi" secondAttribute="bottom" constant="8" id="L1P-CC-dhf"/>
                             <constraint firstItem="DRN-Vn-wUi" firstAttribute="top" secondItem="0x1-Et-Ms2" secondAttribute="bottom" constant="8" id="OAy-GV-Z4b"/>
-                            <constraint firstItem="Zan-Vj-COQ" firstAttribute="top" secondItem="4Qi-f1-fCz" secondAttribute="bottom" constant="209" id="PBt-yD-hK3"/>
+                            <constraint firstItem="Zan-Vj-COQ" firstAttribute="top" secondItem="4Qi-f1-fCz" secondAttribute="bottom" constant="8" id="PBt-yD-hK3"/>
                             <constraint firstItem="m7R-Je-OlT" firstAttribute="top" secondItem="0x1-Et-Ms2" secondAttribute="bottom" id="QEw-AS-wd4"/>
                             <constraint firstItem="4Qi-f1-fCz" firstAttribute="leading" secondItem="m7R-Je-OlT" secondAttribute="trailing" constant="8" id="T5T-YC-5v1"/>
                             <constraint firstItem="m7R-Je-OlT" firstAttribute="leading" secondItem="gZh-EF-fSf" secondAttribute="leadingMargin" constant="-20" id="YFV-6T-f6k"/>
@@ -149,7 +130,18 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Data files" id="7wG-gG-N0f">
+                    <navigationItem key="navigationItem" id="7wG-gG-N0f">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qBX-jM-Hzq">
+                            <rect key="frame" x="308" y="7" width="409" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Tap here to delete all files">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="deleteAllFiles:" destination="yp3-sU-Xuj" eventType="touchUpInside" id="Zot-qg-Ah7"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="Uz4-PK-iHM">
                             <connections>
                                 <action selector="shareFile:" destination="yp3-sU-Xuj" id="m8M-Z0-ogW"/>
@@ -160,8 +152,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="chartView" destination="veS-HS-FhA" id="S5s-OP-e2p"/>
-                        <outlet property="enableChart" destination="L0Y-dL-Cdo" id="KTx-FA-Jjq"/>
                         <outlet property="fileDescription" destination="DRN-Vn-wUi" id="svS-qz-Kz5"/>
                         <outlet property="shareButton" destination="Uz4-PK-iHM" id="Fes-0M-0nS"/>
                         <outlet property="tableView" destination="m7R-Je-OlT" id="hAd-pU-ROl"/>

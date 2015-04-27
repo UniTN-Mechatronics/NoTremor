@@ -23,7 +23,7 @@
     self.folderPath =
         [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     self.types = [NSMutableArray
-        arrayWithObjects:MXLogDocument.class, MXMovieDocument.class, nil];
+                  arrayWithObjects:MXLogDocument.class, nil]; //, MXMovieDocument.class, nil];
     self.list = [[NSMutableDictionary alloc] init];
   }
   return self;
@@ -58,6 +58,14 @@
   MXDocument *doc = self.list[key][idx];
   [_list[key] removeObjectAtIndex:idx];
   [[NSFileManager defaultManager] removeItemAtPath:doc.filePath error:nil];
+}
+
+- (void)removeAllDocuments {
+  NSMutableArray *list = self.list[@"Log file"];
+  for (NSInteger idx = 0; idx < list.count; idx++) {
+    [[NSFileManager defaultManager] removeItemAtPath:((MXLogDocument *)[list objectAtIndex:idx]).filePath error:nil];
+    [list removeObjectAtIndex:idx];
+  }
 }
 
 - (NSString *)sectionAtIndex:(NSInteger)index {

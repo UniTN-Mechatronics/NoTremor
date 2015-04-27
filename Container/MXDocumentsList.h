@@ -21,5 +21,6 @@
 - (void)scanFolder:(NSString *)path forTypes:(NSArray *)types;
 - (MXDocument *)documentAtIndexPath:(NSIndexPath *)indexPath;
 - (void)removeDocumentAtIndexPath:(NSIndexPath *)indexPath;
+- (void)removeAllDocuments;
 - (NSString *)sectionAtIndex:(NSInteger)index;
 @end
