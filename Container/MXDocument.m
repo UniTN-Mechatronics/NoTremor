@@ -96,7 +96,7 @@
 - (NSString *)fileDescription
 {
   NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.filePath error:nil];
-  return [NSString stringWithFormat:@"%@ (%lu kb)", self.fileName, [attr[NSFileSize] integerValue]  / 1024];
+  return [NSString stringWithFormat:@"%@ (%ld kb)", self.fileName, (long int)[attr[NSFileSize] integerValue]  / 1024];
 }
 
 @end
