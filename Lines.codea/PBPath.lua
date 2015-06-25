@@ -42,6 +42,7 @@ function PBPath:header(n)
     desc = desc.."\n# disturbing lines: "..disturbingLines
     desc = desc.."\n# mirror disturber: "..tostring(mirrorDisturber)
     desc = desc.."\n# subject name: "..subject
+    desc = desc.."\n# last drug taken: "..(lastDrug * 3)
     desc = desc.."\n# blanking: "..tostring(self.blanking)
     desc = desc.."\n# offset (phisical masking): "..tostring(self.targetOffset)
     desc = desc.."\n# loop delay buffer size (#): "..self.loopDelay.."\n"
@@ -202,7 +203,7 @@ function PBPath:makePath(n)
         repeat
             rx = math.random(10, WIDTH-10)
             dx = rx - prevx
-        until math.abs(dx) <= WIDTH * 0.4 and math.abs(dx) >= WIDTH * 0.05
+        until math.abs(dx) <= WIDTH * 0.4 and math.abs(dx) >= WIDTH * 0.01
         distx = prevx - dx
         if distx <= 0 then
             distx = 10
